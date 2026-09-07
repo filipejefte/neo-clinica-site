@@ -1,0 +1,46 @@
+# Roda a verificacao estatica a cada push.
+#
+# tools/check.mjs falha se aparecer link quebrado, JSON-LD invalido, pagina
+# sem CSP, estilo ou script inline, termo vedado na publicidade medica ou
+# qualquer dado do ambiente de trabalho. O workflow so le o repositorio:
+# nenhuma permissao de escrita, nenhum segredo.
+
+name: Verificar site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verificacao estatica das paginas publicadas
+        run: node tools/check.mjs
+
+      - name: As paginas publicadas conferem com as fontes em src/
+        run: |
+          if grep -q 'content="noindex, nofollow"' index.html; then MODO="--preview"; else MODO=""; fi
+          echo "Reconstruindo com: node build.mjs $MODO"
+          node build.mjs $MODO
+          # A data de "ultima atualizacao" e o sitemap mudam a cada build; o
+          # resto precisa ser identico ao que foi commitado.
+          git checkout -- sitemap.xml privacidade.html
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "As paginas geradas divergem das fontes em src/."
+            git --no-pager diff --stat
+            exit 1
+          fi

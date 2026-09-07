@@ -1,0 +1,19 @@
+# Material de trabalho e notas internas. O repositorio e' publico: nada daqui
+# deve chegar ao cliente nem a quem buscar a clinica no Google.
+interno/
+NOTAS-INTERNAS.md
+
+# Saida do empacotador de pre-visualizacao, gerada sob demanda.
+dist/
+
+# Configuracao local de ferramentas.
+.claude/
+
+# Perfis temporarios do Chrome usados para renderizar imagens.
+tools/chrome-profile-*/
+
+# Sistema
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
