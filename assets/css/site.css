@@ -49,32 +49,36 @@
 :root{
   color-scheme:light;
 
-  /* Cores do logotipo: roxo do "Neo" e malva do "Clínica" e do símbolo.
-     Os neutros são creme quente; as superfícies escuras usam o roxo. */
+  /* As duas cores do logotipo, amostradas do núcleo dos traços na arte
+     oficial: malva #C997B8 (símbolo e "Clínica") e roxo #64446E ("Neo",
+     "Amor & Saúde" e o alvo). Toda a paleta abaixo deriva delas. */
+  --malva:#C997B8;
+  --roxo:#64446E;
+
   --cream:#FBF6F2;
-  --cream-2:#F5ECE8;
-  --white:#FFFDFB;
-  --blush:#F4E6F0;
-  --blush-2:#E8D3E3;
-  --rule:#E9DDE5;
-  --rule-2:#D6C4D2;
+  --cream-2:#F5ECEF;
+  --white:#FFFDFC;
+  --blush:#F5E8F0;
+  --blush-2:#EBD6E5;
+  --rule:#EADEE6;
+  --rule-2:#D8C6D3;
 
   --ink:#2E1F33;
   --ink-2:#584860;
   --ink-3:#7A6A80;
   --muted:#7A6A80;
 
-  --plum:#4B2F58;
-  --plum-2:#5A3A6B;
-  --plum-3:#6B4A7C;
-  --on-plum:#F8EEF5;
-  --on-plum-2:#CFB8CC;
-  --on-plum-rule:#6A4D78;
+  --plum:#64446E;
+  --plum-2:#74527E;
+  --plum-3:#85628F;
+  --on-plum:#F8EFF5;
+  --on-plum-2:#D3BDD3;
+  --on-plum-rule:#7B5A85;
 
-  --rose:#BF8FB3;
-  --rose-2:#CFA6C6;
-  --rose-ink:#8C5583;
-  --rose-soft:#F6E9F3;
+  --rose:#C997B8;
+  --rose-2:#D4A8C4;
+  --rose-ink:#8E5A7C;
+  --rose-soft:#F7EAF3;
 
   --apricot:#E9B78E;
   --apricot-soft:#FBEADB;
@@ -187,20 +191,25 @@ small{font-size:.86em}
   background:rgba(251,246,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid var(--rule)
 }
-.site-head__row{display:flex;align-items:center;gap:28px;min-height:76px}
-/* Logotipo: símbolo em vetor + wordmark em Quicksand, nas cores da marca. */
-.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.brand__symbol{width:64px;height:40px;flex:none}
-.sym{stroke:var(--rose)}
-.sym-dot{fill:var(--rose)}
-.brand__text{display:flex;flex-direction:column;line-height:1}
-.brand__name{font-family:"Quicksand",var(--sans);font-size:1.38rem;font-weight:700;letter-spacing:-.005em;white-space:nowrap}
-.brand__neo{color:var(--plum-2)}
-.brand__clinica{color:var(--rose)}
-.brand__tag{font-family:"Quicksand",var(--sans);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--plum-2);margin-top:5px}
-.brand--foot .brand__symbol{width:80px;height:50px}
-.brand--foot .brand__name{font-size:1.7rem}
-.brand--foot .brand__tag{font-size:.68rem}
+.site-head__row{display:flex;align-items:center;gap:28px;min-height:84px}
+/* Logotipo: símbolo em vetor + wordmark empilhado em Quicksand, nas cores da
+   marca. O tamanho todo escala por --logo, para o cabeçalho e o rodapé
+   usarem a mesma proporção do original. */
+.brand{display:inline-flex;align-items:center;gap:calc(var(--logo) * .26);text-decoration:none;color:var(--ink);--logo:40px}
+.brand__symbol{width:calc(var(--logo) * 1.185);height:var(--logo);flex:none}
+.sym{stroke:var(--malva)}
+.sym-alvo{stroke:var(--roxo)}
+.brand__text{display:flex;flex-direction:column;align-items:flex-start;line-height:.88;font-family:"Quicksand",var(--sans);font-weight:700;letter-spacing:-.01em}
+.brand__neo{font-size:calc(var(--logo) * .58);color:var(--roxo)}
+.brand__clinica{font-size:calc(var(--logo) * .58);color:var(--malva)}
+/* O slogan fica sob um fio, como no original. */
+.brand__tag{
+  font-size:calc(var(--logo) * .20);letter-spacing:.13em;text-transform:uppercase;color:var(--roxo);line-height:1.2;
+  margin-top:calc(var(--logo) * .09);padding-bottom:calc(var(--logo) * .10);
+  border-bottom:1.5px solid var(--malva);align-self:stretch
+}
+.brand--foot{--logo:56px}
+@media (max-width:520px){ .brand{--logo:34px} }
 .nav{display:flex;gap:26px;margin-left:auto}
 .nav__link{
   font-size:.94rem;font-weight:500;color:var(--ink-2);text-decoration:none;
@@ -216,7 +225,7 @@ small{font-size:.86em}
 .burger[aria-expanded="true"] svg:last-child{display:block}
 
 .drawer{
-  position:fixed;inset:76px 0 0 0;z-index:49;background:var(--cream);
+  position:fixed;inset:84px 0 0 0;z-index:49;background:var(--cream);
   padding:24px var(--gutter) 40px;overflow:auto;display:flex;flex-direction:column;gap:28px
 }
 .drawer[hidden]{display:none}

@@ -8,21 +8,16 @@
   html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#FBF6F2}
   .og{position:relative;width:1200px;height:630px;overflow:hidden;font-family:var(--sans);color:var(--ink)}
   .og__orb{position:absolute;border-radius:50%}
-  .og__orb--a{width:640px;height:640px;background:#F4E6F0;right:-160px;top:-220px}
-  .og__orb--b{width:210px;height:210px;background:#BF8FB3;right:250px;bottom:-70px;opacity:.5}
-  .og__orb--c{width:120px;height:120px;background:#4B2F58;right:150px;bottom:110px;opacity:.9}
-  .og__in{position:relative;padding:72px 88px;height:100%;box-sizing:border-box;display:flex;flex-direction:column}
-  .og__brand{display:flex;align-items:center;gap:22px}
-  .og__sym{width:132px;height:82px}
-  .og__word{font-family:"Quicksand",sans-serif;font-weight:700;line-height:.95;letter-spacing:-.005em}
-  .og__neo{font-size:58px;color:#5A3A6B}
-  .og__clinica{font-size:58px;color:#BF8FB3}
-  .og__tag{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#5A3A6B;margin-top:10px;padding-bottom:10px;border-bottom:2px solid #BF8FB3;display:inline-block}
-  .og__title{font-family:var(--serif);font-size:60px;font-weight:450;line-height:1.02;letter-spacing:-.02em;margin:auto 0 0;max-width:720px;color:#2E1F33}
-  .og__title em{font-style:italic;font-weight:400;color:#8C5583}
-  .og__sub{font-size:22px;color:#584860;margin:20px 0 0;max-width:720px;line-height:1.4}
-  .og__chips{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;max-width:760px}
-  .og__chips span{font-size:16px;font-weight:600;color:#4B2F58;background:#fff;border:1.5px solid #D6C4D2;border-radius:999px;padding:9px 16px}
+  .og__orb--a{width:640px;height:640px;background:#F5E8F0;right:-160px;top:-220px}
+  .og__orb--b{width:210px;height:210px;background:#C997B8;right:250px;bottom:-70px;opacity:.5}
+  .og__orb--c{width:120px;height:120px;background:#64446E;right:150px;bottom:110px;opacity:.9}
+  .og__in{position:relative;padding:70px 88px;height:100%;box-sizing:border-box;display:flex;flex-direction:column}
+  .og__brand{--logo:96px}
+  .og__title{font-family:var(--serif);font-size:60px;font-weight:450;line-height:1.02;letter-spacing:-.02em;margin:auto 0 0;max-width:730px;color:#2E1F33}
+  .og__title em{font-style:italic;font-weight:400;color:#8E5A7C}
+  .og__sub{font-size:22px;color:#584860;margin:20px 0 0;max-width:730px;line-height:1.4}
+  .og__chips{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;max-width:770px}
+  .og__chips span{font-size:16px;font-weight:600;color:#64446E;background:#fff;border:1.5px solid #D8C6D3;border-radius:999px;padding:9px 16px}
   .og__foot{position:absolute;right:88px;bottom:70px;font-size:16px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6A80}
 </style>
 </head>
@@ -32,18 +27,21 @@
   <div class="og__orb og__orb--b"></div>
   <div class="og__orb og__orb--c"></div>
   <div class="og__in">
-    <div class="og__brand">
-      <svg class="og__sym" viewBox="0 0 96 60" fill="none" aria-hidden="true">
-        <g stroke="#BF8FB3" stroke-linecap="round">
-          <circle cx="21" cy="10" r="5.2" stroke-width="3.2"/>
-          <circle cx="55" cy="9" r="5.2" stroke-width="3.2"/>
-          <path d="M7 56V35a14 14 0 0 1 28 0v21" stroke-width="6.5"/>
-          <path d="M76 29.5a15.5 15.5 0 1 0 0 25" stroke-width="6.5"/>
-          <circle cx="62" cy="42" r="7.5" stroke-width="3.6"/>
+    <div class="brand og__brand">
+      <svg class="brand__symbol" viewBox="3.5 4 208 175.5" fill="none" aria-hidden="true">
+        <g class="sym" stroke-linecap="round">
+          <circle cx="71.5" cy="27.5" r="15.5" stroke-width="16"/>
+          <circle cx="150" cy="27.5" r="15.5" stroke-width="16"/>
+          <path d="M12.5 170.5V107a42.25 42.25 0 0 1 84.5 0v63.5" stroke-width="18"/>
+          <path d="M200 100.5a52.5 52.5 0 1 0 0 32" stroke-width="18"/>
         </g>
-        <circle cx="62" cy="42" r="2.6" fill="#BF8FB3"/>
+        <g class="sym-alvo"><circle cx="150" cy="116.5" r="18.25" stroke-width="14.5"/></g>
       </svg>
-      <div class="og__word"><div class="og__neo">Neo</div><div class="og__clinica">Clínica</div><div class="og__tag">Amor &amp; Saúde</div></div>
+      <span class="brand__text">
+        <span class="brand__neo">Neo</span>
+        <span class="brand__clinica">Clínica</span>
+        <span class="brand__tag">Amor &amp; Saúde</span>
+      </span>
     </div>
     <h1 class="og__title">Cuidado médico para cada fase da vida, <em>perto de casa.</em></h1>
     <p class="og__sub">Centro de saúde e especialidades em Marília e Garça. Agendamento pelo WhatsApp.</p>

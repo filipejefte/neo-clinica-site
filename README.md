@@ -46,9 +46,12 @@ O build de prévia lista as pendências ao final. Hoje são:
 - convênios aceitos e formas de pagamento;
 - disponibilidade de teleconsulta;
 - e-mail institucional e encarregado de dados (LGPD);
-- arquivo vetorial original do logotipo. O site usa uma recriação em vetor
-  (símbolo em `src/chrome.mjs`, wordmark em Quicksand), feita a partir da
-  imagem fornecida; o original substitui a recriação quando chegar;
+- arquivo vetorial do logotipo (AI, SVG ou PDF). O site usa uma recriação em
+  vetor: os raios, larguras de traço e posições do símbolo foram medidos
+  pixel a pixel na arte oficial da clínica e conferidos por sobreposição por
+  diferença. O wordmark usa Quicksand 700, a fonte mais próxima da original.
+  O arquivo original substitui a recriação quando chegar; só o símbolo em
+  `src/chrome.mjs` e a folha `assets/fonts/quicksand-700.woff2` mudam;
 - domínio definitivo. Os endereços óbvios com "neoclinica" já pertencem a
   três empresas homônimas; a escolha precisa ser feita antes da publicação.
 

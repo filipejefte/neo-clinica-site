@@ -15,6 +15,11 @@
 
 import { CLINICA, NAV, UNIDADES, AREAS } from './dados.mjs';
 
+/* As duas cores do logotipo, amostradas do núcleo dos traços na arte oficial
+   da clínica. Toda a paleta do site deriva delas (ver assets/css/site.css). */
+export const MALVA = '#C997B8';
+export const ROXO = '#64446E';
+
 /* Escapa texto para atributo ou conteúdo HTML. */
 export const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -78,39 +83,55 @@ export const ICON = {
   mente: svg('<path d="M12 4c2.3 2.4 3.5 5 3.5 7.6 0 2.8-1.2 5.3-3.5 7.4-2.3-2.1-3.5-4.6-3.5-7.4C8.5 9 9.7 6.4 12 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 9.5c3 .5 5.2 2.8 5.9 6.2-3-.5-5.3-2.8-5.9-6.2ZM18.5 9.5c-3 .5-5.2 2.8-5.9 6.2 3-.5 5.3-2.8 5.9-6.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 15.5c1.5 3 4.4 4.7 8 4.7s6.5-1.7 8-4.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', 28)
 };
 
-/* Símbolo do logotipo da clínica, redesenhado em vetor a partir da imagem
-   fornecida: duas figuras (as iniciais "n" e "c") com cabeças em anel e um
-   alvo dentro do "c". O arquivo vetorial original, quando enviado pela
-   clínica, substitui estes traçados (ver README). */
-const SIMBOLO_PATHS =
-  '<circle cx="21" cy="10" r="5.2" stroke-width="3.2"/>' +
-  '<circle cx="55" cy="9" r="5.2" stroke-width="3.2"/>' +
-  '<path d="M7 56V35a14 14 0 0 1 28 0v21" stroke-width="6.5"/>' +
-  '<path d="M76 29.5a15.5 15.5 0 1 0 0 25" stroke-width="6.5"/>' +
-  '<circle cx="62" cy="42" r="7.5" stroke-width="3.6"/>';
-const SIMBOLO_PONTO = '<circle cx="62" cy="42" r="2.6"/>';
+/* Símbolo do logotipo, redesenhado em vetor a partir da arte oficial da
+   clínica: as iniciais "n" e "c" com duas cabeças em anel e um alvo roxo
+   dentro do "c". Os raios, larguras de traço e posições foram medidos pixel
+   a pixel na arte original (711 px) e transpostos para este sistema de
+   coordenadas; conferido por sobreposição por diferença.
+
+   Coordenadas na arte original (711 px) → aqui: (x - 44, y - 235.5).
+     cabeças   centro (115,5 · 263) e (194 · 263), raio médio 15,5, traço 16
+     "n"       arco centro (98,75 · 342,5), raio médio 42,25, traço 18
+     "c"       centro (194 · 352), raio médio 52,5, traço 18, abertura à direita
+     alvo      centro (194 · 352), raio médio 18,25, traço 14,5
+
+   O arquivo vetorial original, quando enviado pela clínica, substitui estes
+   traçados (ver README). */
+export const SIMBOLO_VIEWBOX = '3.5 4 208 175.5';
+
+/* Traços em malva: as duas cabeças em anel, o "n" e o "c". */
+const SIMBOLO_MALVA =
+  '<circle cx="71.5" cy="27.5" r="15.5" stroke-width="16"/>' +
+  '<circle cx="150" cy="27.5" r="15.5" stroke-width="16"/>' +
+  '<path d="M12.5 170.5V107a42.25 42.25 0 0 1 84.5 0v63.5" stroke-width="18"/>' +
+  '<path d="M200 100.5a52.5 52.5 0 1 0 0 32" stroke-width="18"/>';
+/* O alvo, em roxo, concêntrico ao "c". */
+const SIMBOLO_ROXO = '<circle cx="150" cy="116.5" r="18.25" stroke-width="14.5"/>';
 
 export const SIMBOLO = (cls = 'brand__symbol') =>
-  `<svg class="${cls}" viewBox="0 0 96 60" fill="none" aria-hidden="true" focusable="false">` +
-  `<g class="sym" stroke-linecap="round">${SIMBOLO_PATHS}</g>` +
-  `<g class="sym-dot">${SIMBOLO_PONTO}</g>` +
+  `<svg class="${cls}" viewBox="${SIMBOLO_VIEWBOX}" fill="none" aria-hidden="true" focusable="false">` +
+  `<g class="sym" stroke-linecap="round">${SIMBOLO_MALVA}</g>` +
+  `<g class="sym-alvo">${SIMBOLO_ROXO}</g>` +
   '</svg>';
 
-/* Lockup horizontal: símbolo, "Neo" em roxo, "Clínica" em malva e o slogan. */
+/* Lockup do logotipo: símbolo, "Neo" em roxo sobre "Clínica" em malva, e o
+   slogan sob um fio, como no original. */
 export const LOGO = (cls = 'brand') =>
   `${SIMBOLO(cls + '__symbol')}` +
   `<span class="${cls}__text">` +
-  `<span class="${cls}__name"><span class="${cls}__neo">Neo</span> <span class="${cls}__clinica">Clínica</span></span>` +
+  `<span class="${cls}__neo">Neo</span>` +
+  `<span class="${cls}__clinica">Clínica</span>` +
   `<span class="${cls}__tag">${esc(CLINICA.slogan)}</span>` +
   '</span>';
 
 /* Favicon SVG embutido (data URI): o símbolo sobre creme. */
 const FAVICON = "data:image/svg+xml," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">' +
-  '<rect width="96" height="96" rx="20" fill="#FBF6F2"/>' +
-  `<g fill="none" stroke="#BF8FB3" stroke-linecap="round" transform="translate(0 18)">${SIMBOLO_PATHS}</g>` +
-  `<g fill="#BF8FB3" transform="translate(0 18)">${SIMBOLO_PONTO}</g>` +
-  '</svg>');
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 232">' +
+  '<rect width="232" height="232" rx="48" fill="#FBF6F2"/>' +
+  '<g transform="translate(8.5 24)" fill="none">' +
+  `<g stroke="${MALVA}" stroke-linecap="round">${SIMBOLO_MALVA}</g>` +
+  `<g stroke="${ROXO}">${SIMBOLO_ROXO}</g>` +
+  '</g></svg>');
 
 /* Política de segurança de conteúdo do documento. Sem 'unsafe-inline' em
    nenhuma diretiva; o único destino de formulário é o WhatsApp. */
