@@ -46,7 +46,9 @@ O build de prévia lista as pendências ao final. Hoje são:
 - convênios aceitos e formas de pagamento;
 - disponibilidade de teleconsulta;
 - e-mail institucional e encarregado de dados (LGPD);
-- logotipo em vetor (o site usa uma marca provisória em SVG);
+- arquivo vetorial original do logotipo. O site usa uma recriação em vetor
+  (símbolo em `src/chrome.mjs`, wordmark em Quicksand), feita a partir da
+  imagem fornecida; o original substitui a recriação quando chegar;
 - domínio definitivo. Os endereços óbvios com "neoclinica" já pertencem a
   três empresas homônimas; a escolha precisa ser feita antes da publicação.
 

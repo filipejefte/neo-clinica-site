@@ -368,7 +368,7 @@ export function equipe(ctx) {
           <span class="person__avatar" aria-hidden="true">${ICON[a.icone]}</span>
           <div>
             <p class="eyebrow">${esc(a.nome)}</p>
-            <h2 class="card__title">${ctx.pend(m.nome, 'Nome do(a) profissional a confirmar')}</h2>
+            <h2 class="card__title">${ctx.pend(m.nome, 'Profissional a confirmar')}</h2>
           </div>
         </div>
         <dl class="person__data">

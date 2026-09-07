@@ -36,35 +36,45 @@
   font-display:swap;
   src:url("../fonts/figtree-italic.woff2") format("woff2");
 }
+/* Só para o wordmark do logotipo. */
+@font-face{
+  font-family:"Quicksand";
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url("../fonts/quicksand-700.woff2") format("woff2");
+}
 
 /* ---------- 1. tokens ---------------------------------------------------- */
 :root{
   color-scheme:light;
 
-  --cream:#FBF6F1;
-  --cream-2:#F4ECE5;
+  /* Cores do logotipo: roxo do "Neo" e malva do "Clínica" e do símbolo.
+     Os neutros são creme quente; as superfícies escuras usam o roxo. */
+  --cream:#FBF6F2;
+  --cream-2:#F5ECE8;
   --white:#FFFDFB;
-  --blush:#F5E6EE;
-  --blush-2:#EAD3E0;
-  --rule:#E9DCE1;
-  --rule-2:#D7C4CE;
+  --blush:#F4E6F0;
+  --blush-2:#E8D3E3;
+  --rule:#E9DDE5;
+  --rule-2:#D6C4D2;
 
-  --ink:#2A1C2E;
+  --ink:#2E1F33;
   --ink-2:#584860;
-  --ink-3:#7B6B80;
-  --muted:#9D8FA1;
+  --ink-3:#7A6A80;
+  --muted:#7A6A80;
 
-  --plum:#3B2140;
-  --plum-2:#4D2E54;
-  --plum-3:#5F3D67;
-  --on-plum:#F8EEF3;
-  --on-plum-2:#CDB6C6;
-  --on-plum-rule:#5A3D62;
+  --plum:#4B2F58;
+  --plum-2:#5A3A6B;
+  --plum-3:#6B4A7C;
+  --on-plum:#F8EEF5;
+  --on-plum-2:#CFB8CC;
+  --on-plum-rule:#6A4D78;
 
-  --rose:#B5789D;
-  --rose-2:#C48EB2;
-  --rose-ink:#8E4F79;
-  --rose-soft:#F6E7EF;
+  --rose:#BF8FB3;
+  --rose-2:#CFA6C6;
+  --rose-ink:#8C5583;
+  --rose-soft:#F6E9F3;
 
   --apricot:#E9B78E;
   --apricot-soft:#FBEADB;
@@ -166,6 +176,10 @@ small{font-size:.86em}
 .ribbon .i{margin-top:3px}
 .ribbon p{margin:0}
 .ribbon .pend{background:#FFF6EC;border-color:var(--apricot);color:var(--apricot-ink)}
+@media (max-width:760px){
+  .ribbon .shell{font-size:.8rem;line-height:1.4;padding:8px 0}
+  .ribbon .pend{font-size:.66rem}
+}
 
 /* ---------- 6. cabeçalho ------------------------------------------------- */
 .site-head{
@@ -174,14 +188,19 @@ small{font-size:.86em}
   border-bottom:1px solid var(--rule)
 }
 .site-head__row{display:flex;align-items:center;gap:28px;min-height:76px}
+/* Logotipo: símbolo em vetor + wordmark em Quicksand, nas cores da marca. */
 .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.brand__mark{width:38px;height:38px;flex:none}
-.mark-a{fill:var(--rose)}
-.mark-b{fill:var(--plum);fill-opacity:.92}
-.mark-c{fill:var(--blush-2)}
+.brand__symbol{width:64px;height:40px;flex:none}
+.sym{stroke:var(--rose)}
+.sym-dot{fill:var(--rose)}
 .brand__text{display:flex;flex-direction:column;line-height:1}
-.brand__name{font-family:var(--serif);font-size:1.32rem;font-weight:500;letter-spacing:-.01em;color:var(--plum)}
-.brand__tag{font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-ink);margin-top:5px}
+.brand__name{font-family:"Quicksand",var(--sans);font-size:1.38rem;font-weight:700;letter-spacing:-.005em;white-space:nowrap}
+.brand__neo{color:var(--plum-2)}
+.brand__clinica{color:var(--rose)}
+.brand__tag{font-family:"Quicksand",var(--sans);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--plum-2);margin-top:5px}
+.brand--foot .brand__symbol{width:80px;height:50px}
+.brand--foot .brand__name{font-size:1.7rem}
+.brand--foot .brand__tag{font-size:.68rem}
 .nav{display:flex;gap:26px;margin-left:auto}
 .nav__link{
   font-size:.94rem;font-weight:500;color:var(--ink-2);text-decoration:none;

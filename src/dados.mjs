@@ -130,7 +130,7 @@ export const AREAS = [
   {
     slug: 'pediatria-e-neonatologia',
     nome: 'Pediatria e Neonatologia',
-    curto: 'Do recém-nascido à adolescência',
+    curto: 'Bebês, crianças e adolescentes',
     icone: 'urso',
     resumo: 'Primeira consulta do bebê, acompanhamento do crescimento e cuidado nas doenças comuns da infância.',
     para: 'Para famílias que esperam um bebê, acabaram de sair da maternidade ou querem acompanhamento regular de crianças e adolescentes.',
@@ -174,7 +174,7 @@ export const AREAS = [
   {
     slug: 'saude-mental',
     nome: 'Saúde Mental',
-    curto: 'Avaliação e acompanhamento médico',
+    curto: 'Ansiedade, humor e atenção',
     icone: 'mente',
     resumo: 'Atendimento médico para ansiedade, depressão, burnout, TDAH e outras questões de saúde mental, com plano de cuidado individual.',
     para: 'Para quem sente que a ansiedade, o desânimo ou a exaustão passaram do ponto, ou quer entender melhor sintomas de atenção, sono e humor.',

@@ -56,7 +56,8 @@ const svg = (inner, size = 20, vb = 24) =>
 export const ICON = {
   arrow: svg('<path d="M4 12h16M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>', 18),
   external: svg('<path d="M10 5H5v14h14v-5M14 5h5v5M19 5l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>', 15),
-  whatsapp: svg('<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.2 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.7Z" fill="currentColor"/>'),
+  /* Glifo oficial do WhatsApp (traçado do Simple Icons, licença CC0). */
+  whatsapp: svg('<path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>'),
   phone: svg('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'),
   pin: svg('<path d="M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.6"/>'),
   clock: svg('<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'),
@@ -71,29 +72,44 @@ export const ICON = {
   close: '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" focusable="false"><path d="m5 5 12 12M17 5 5 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
 
   /* Ícones das áreas de atendimento, desenhados para o site. */
-  flor: svg('<path d="M12 21c0-4 0-7 0-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12c-3.5 0-6-2.5-6-6 3.5 0 6 2.5 6 6Zm0 0c3.5 0 6-2.5 6-6-3.5 0-6 2.5-6 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12c-2.2 3-5.6 4.2-8 3.5 1-3 3.4-4.7 8-3.5Zm0 0c2.2 3 5.6 4.2 8 3.5-1-3-3.4-4.7-8-3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>', 28),
+  flor: svg('<path d="M6.5 5v5.5a5.5 5.5 0 0 0 11 0V5l-2.6 2.2L12 4.2 9.1 7.2 6.5 5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 16v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 20.5c-2.6 0-4.6-1.5-5.2-3.8 2.6 0 4.6 1.5 5.2 3.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>', 28),
   urso: svg('<circle cx="12" cy="13" r="7.5" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="6.5" r="2.6" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="6.5" r="2.6" stroke="currentColor" stroke-width="1.6"/><circle cx="9.6" cy="12" r=".9" fill="currentColor"/><circle cx="14.4" cy="12" r=".9" fill="currentColor"/><path d="M10.8 15.2c.7.8 1.7.8 2.4 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>', 28),
   coracao: svg('<path d="M12 20.5s-8-4.9-8-11A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5c0 6.1-8 11-8 11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 12.5h3.5l1.5-2.5 2 5 1.5-3.5h5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>', 28),
-  mente: svg('<path d="M9.5 21v-3.2A7.5 7.5 0 1 1 18 11.8l1.6 2.7H18v2.5a2 2 0 0 1-2 2h-1.5V21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 14.5c0-2.2 1.5-3 1.5-4.5a2 2 0 1 0-4 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', 28)
+  mente: svg('<path d="M12 4c2.3 2.4 3.5 5 3.5 7.6 0 2.8-1.2 5.3-3.5 7.4-2.3-2.1-3.5-4.6-3.5-7.4C8.5 9 9.7 6.4 12 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 9.5c3 .5 5.2 2.8 5.9 6.2-3-.5-5.3-2.8-5.9-6.2ZM18.5 9.5c-3 .5-5.2 2.8-5.9 6.2 3-.5 5.3-2.8 5.9-6.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 15.5c1.5 3 4.4 4.7 8 4.7s6.5-1.7 8-4.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', 28)
 };
 
-/* Marca: dois círculos que se sobrepõem, o abraço que o slogan "Amor & Saúde"
-   sugere. Substituir pelo logotipo vetorial da clínica quando ele for
-   fornecido (ver README). */
-export const MARCA = (cls = 'brand__mark') =>
-  `<svg class="${cls}" viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">` +
-  '<circle cx="15" cy="20" r="11" class="mark-a"/>' +
-  '<circle cx="25" cy="20" r="11" class="mark-b"/>' +
-  '<path d="M20 11.5a11 11 0 0 1 0 17 11 11 0 0 1 0-17Z" class="mark-c"/>' +
+/* Símbolo do logotipo da clínica, redesenhado em vetor a partir da imagem
+   fornecida: duas figuras (as iniciais "n" e "c") com cabeças em anel e um
+   alvo dentro do "c". O arquivo vetorial original, quando enviado pela
+   clínica, substitui estes traçados (ver README). */
+const SIMBOLO_PATHS =
+  '<circle cx="21" cy="10" r="5.2" stroke-width="3.2"/>' +
+  '<circle cx="55" cy="9" r="5.2" stroke-width="3.2"/>' +
+  '<path d="M7 56V35a14 14 0 0 1 28 0v21" stroke-width="6.5"/>' +
+  '<path d="M76 29.5a15.5 15.5 0 1 0 0 25" stroke-width="6.5"/>' +
+  '<circle cx="62" cy="42" r="7.5" stroke-width="3.6"/>';
+const SIMBOLO_PONTO = '<circle cx="62" cy="42" r="2.6"/>';
+
+export const SIMBOLO = (cls = 'brand__symbol') =>
+  `<svg class="${cls}" viewBox="0 0 96 60" fill="none" aria-hidden="true" focusable="false">` +
+  `<g class="sym" stroke-linecap="round">${SIMBOLO_PATHS}</g>` +
+  `<g class="sym-dot">${SIMBOLO_PONTO}</g>` +
   '</svg>';
 
-/* Favicon SVG embutido (data URI), sem arquivo externo. */
+/* Lockup horizontal: símbolo, "Neo" em roxo, "Clínica" em malva e o slogan. */
+export const LOGO = (cls = 'brand') =>
+  `${SIMBOLO(cls + '__symbol')}` +
+  `<span class="${cls}__text">` +
+  `<span class="${cls}__name"><span class="${cls}__neo">Neo</span> <span class="${cls}__clinica">Clínica</span></span>` +
+  `<span class="${cls}__tag">${esc(CLINICA.slogan)}</span>` +
+  '</span>';
+
+/* Favicon SVG embutido (data URI): o símbolo sobre creme. */
 const FAVICON = "data:image/svg+xml," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
-  '<rect width="40" height="40" rx="9" fill="#FBF6F1"/>' +
-  '<circle cx="15" cy="20" r="11" fill="#B5789D"/>' +
-  '<circle cx="25" cy="20" r="11" fill="#3B2140" fill-opacity=".92"/>' +
-  '<path d="M20 11.5a11 11 0 0 1 0 17 11 11 0 0 1 0-17Z" fill="#F3D9E6"/>' +
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">' +
+  '<rect width="96" height="96" rx="20" fill="#FBF6F2"/>' +
+  `<g fill="none" stroke="#BF8FB3" stroke-linecap="round" transform="translate(0 18)">${SIMBOLO_PATHS}</g>` +
+  `<g fill="#BF8FB3" transform="translate(0 18)">${SIMBOLO_PONTO}</g>` +
   '</svg>');
 
 /* Política de segurança de conteúdo do documento. Sem 'unsafe-inline' em
@@ -210,7 +226,7 @@ export function shell({ p, ctx, body, ld = [] }) {
   const garca = UNIDADES.find(u => !u.principal);
 
   const ribbon = ctx.preview
-    ? `<div class="ribbon" role="note"><div class="shell">${ICON.alert}<p><strong>Prévia de apresentação.</strong> Este endereço é um protótipo do novo site para apreciação da clínica. Itens marcados como <span class="pend pend--demo">a confirmar</span> serão preenchidos com as informações oficiais antes da publicação.</p></div></div>`
+    ? `<div class="ribbon" role="note"><div class="shell">${ICON.alert}<p><strong>Prévia de apresentação.</strong> Protótipo do novo site para apreciação da clínica. Os itens <span class="pend pend--demo">a confirmar</span> serão preenchidos antes da publicação.</p></div></div>`
     : '';
 
   return `<!doctype html>
@@ -225,7 +241,7 @@ export function shell({ p, ctx, body, ld = [] }) {
 <meta name="description" content="${esc(p.descricao)}">
 <link rel="canonical" href="${urlPagina}">
 <meta name="robots" content="${robots}">
-<meta name="theme-color" content="#3B2140">
+<meta name="theme-color" content="#4B2F58">
 <meta name="geo.region" content="BR-SP">
 <meta name="geo.placename" content="Marília">
 <meta property="og:type" content="website">
@@ -258,8 +274,7 @@ ${ribbon}
 <header class="site-head">
   <div class="shell site-head__row">
     <a class="brand" href="${rel}index.html" aria-label="${esc(CLINICA.nome)}, página inicial">
-      ${MARCA()}
-      <span class="brand__text"><span class="brand__name">Neo Clínica</span><span class="brand__tag">${esc(CLINICA.slogan)}</span></span>
+      ${LOGO()}
     </a>
     <nav class="nav" aria-label="Principal">${navLinks}</nav>
     <div class="site-head__cta">
@@ -285,8 +300,7 @@ ${body}
     <div class="foot__grid">
       <div class="foot__brand">
         <a class="brand brand--foot" href="${rel}index.html" aria-label="${esc(CLINICA.nome)}, página inicial">
-          ${MARCA()}
-          <span class="brand__text"><span class="brand__name">Neo Clínica</span><span class="brand__tag">${esc(CLINICA.slogan)}</span></span>
+          ${LOGO()}
         </a>
         <p>Centro de saúde e especialidades. Atendimento em Marília e Garça, com agendamento pelo WhatsApp.</p>
         <p class="foot__social"><a href="${CLINICA.instagram}" ${EXT}>${ICON.instagram}<span>${esc(CLINICA.instagramUsuario)}</span></a></p>
