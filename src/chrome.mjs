@@ -283,8 +283,9 @@ export function shell({ p, ctx, body, ld = [] }) {
 <meta name="twitter:image" content="${ctx.origem}/assets/img/og.png">
 <link rel="icon" href="${FAVICON}">
 <link rel="apple-touch-icon" href="${rel}assets/img/icone-512.png">
-<link rel="preload" href="${rel}assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${rel}assets/fonts/literata.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${rel}assets/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${rel}assets/fonts/quicksand-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${rel}assets/css/site.css">
 <script src="${rel}assets/js/site.js" defer></script>
 ${jsonld}
@@ -303,14 +304,14 @@ ${ribbon}
       <button class="burger" type="button" aria-expanded="false" aria-controls="gaveta" aria-label="Abrir menu">${ICON.menu}${ICON.close}</button>
     </div>
   </div>
-</header>
-<div class="drawer" id="gaveta" hidden>
-  <nav class="drawer__nav" aria-label="Menu">${drawerLinks}</nav>
-  <div class="drawer__foot">
-    ${btnWa('Agendar pelo WhatsApp')}
-    <a class="btn btn--ghost" href="tel:${CLINICA.telefoneHref}">${ICON.phone}<span>${esc(CLINICA.telefone)}</span></a>
+  <div class="drawer" id="gaveta" hidden>
+    <nav class="drawer__nav" aria-label="Menu">${drawerLinks}</nav>
+    <div class="drawer__foot">
+      ${btnWa('Agendar pelo WhatsApp')}
+      <a class="btn btn--ghost" href="tel:${CLINICA.telefoneHref}">${ICON.phone}<span>${esc(CLINICA.telefone)}</span></a>
+    </div>
   </div>
-</div>
+</header>
 
 <main id="conteudo" tabindex="-1">
 ${body}
@@ -345,9 +346,17 @@ ${body}
           <li><a href="${rel}privacidade.html">${ICON.shield}<span>Privacidade</span></a></li>
         </ul>
       </div>
+      <div class="foot__col">
+        <h2 class="foot__title">Navegação</h2>
+        <ul class="foot__list foot__list--nav">
+          ${NAV.map(n => `<li><a href="${rel}${n.href}">${esc(n.rotulo)}</a></li>`).join('\n          ')}
+        </ul>
+      </div>
     </div>
     <div class="foot__legal">
-      <p>${ctx.pend(CLINICA.razaoSocial, 'Razão social a confirmar')} · CNPJ ${ctx.pend(CLINICA.cnpj, 'a confirmar')} · Inscrição da clínica no CRM-SP ${ctx.pend(CLINICA.registroCRM, 'a confirmar')}</p>
+      <p>${ctx.pend(CLINICA.razaoSocial, 'Razão social a confirmar')}</p>
+      <p>CNPJ ${ctx.pend(CLINICA.cnpj, 'a confirmar')}</p>
+      <p>Inscrição da clínica no CRM-SP ${ctx.pend(CLINICA.registroCRM, 'a confirmar')}</p>
       <p>Diretor técnico: ${ctx.pend(CLINICA.diretorTecnico, 'nome e CRM a confirmar')}</p>
       <p>As informações deste site têm caráter educativo e não substituem a consulta médica. Em caso de urgência, ligue 192 (SAMU).</p>
       <p>© ${new Date().getFullYear()} ${esc(CLINICA.nome)}. Todos os direitos reservados.</p>

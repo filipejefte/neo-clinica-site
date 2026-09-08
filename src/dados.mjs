@@ -142,9 +142,9 @@ export const AREAS = [
       'Consultas para tosse, febre, cólica, refluxo e outras queixas frequentes',
       'Orientação sobre vacinas e exames de triagem do recém-nascido'
     ],
-    primeiraConsulta: 'Leve a caderneta da criança, o cartão de vacinas, o resumo de alta da maternidade (se houver) e anote as dúvidas que surgirem em casa. Elas costumam ser as mais importantes.',
+    primeiraConsulta: 'Leve a caderneta da criança, o cartão de vacinas, o resumo de alta da maternidade (se houver) e anote as dúvidas que surgirem em casa, para não esquecer nenhuma na hora.',
     perguntas: [
-      { q: 'Quando deve ser a primeira consulta do bebê?', a: 'Em geral na primeira ou segunda semana de vida, para avaliar peso, amamentação, icterícia e o resultado dos testes de triagem. A maternidade costuma indicar o prazo na alta.' },
+      { q: 'Quando deve ser a primeira consulta do bebê?', a: 'Nos primeiros dias após a alta da maternidade, em geral até o sétimo dia de vida, para avaliar peso, amamentação, icterícia e o resultado dos testes de triagem. A maternidade costuma indicar a data na alta.' },
       { q: 'A clínica acompanha prematuros?', a: 'Sim. A área inclui neonatologia, com acompanhamento de bebês que nasceram antes do tempo ou que precisaram de cuidados especiais ao nascer.' },
       { q: 'Vocês atendem adolescentes?', a: 'Sim. O acompanhamento pediátrico pode seguir até o fim da adolescência, com consultas adaptadas a cada idade.' }
     ]
@@ -186,9 +186,9 @@ export const AREAS = [
       'Transtornos do sono',
       'Acompanhamento com plano de cuidado, medicamentoso ou não'
     ],
-    primeiraConsulta: 'Anote desde quando os sintomas aparecem e o que muda no seu dia a dia. Leve a lista de medicamentos em uso, inclusive os que já tentou. A primeira consulta é uma conversa longa, sem pressa.',
+    primeiraConsulta: 'Anote desde quando os sintomas aparecem e o que muda no seu dia a dia. Leve a lista de medicamentos em uso e os que já tentou antes. A primeira consulta é uma conversa longa, sem pressa.',
     perguntas: [
-      { q: 'Como sei se é hora de procurar ajuda?', a: 'Quando os sintomas duram semanas, atrapalham trabalho, estudo, sono ou relações, ou quando as estratégias que costumavam funcionar já não bastam. A avaliação serve justamente para esclarecer isso.' },
+      { q: 'Como sei se é hora de procurar ajuda?', a: 'Quando os sintomas duram semanas, atrapalham trabalho, estudo, sono ou relações, ou quando as estratégias que costumavam funcionar já não bastam. Na dúvida, a consulta serve para distinguir uma fase ruim de um quadro que precisa de tratamento.' },
       { q: 'Vou precisar tomar remédio?', a: 'Nem sempre. O plano de cuidado depende da avaliação e é construído em conjunto. Pode incluir medicamento, psicoterapia, mudanças de rotina ou a combinação deles.' },
       { q: 'O atendimento é sigiloso?', a: 'Sim. O sigilo médico é assegurado por lei e pelo Código de Ética Médica, e vale para tudo o que é conversado em consulta.' }
     ]
@@ -209,7 +209,7 @@ export const EQUIPE = [
 export const FAQ = [
   { q: 'Como marco uma consulta?', a: 'Pelo WhatsApp, no botão que aparece em todas as páginas, ou pelo telefone fixo. A equipe confirma horário, unidade e o que levar no dia.' },
   { q: 'A clínica atende convênios?', a: null, pend: 'Convênios aceitos e formas de pagamento a confirmar com a clínica.' },
-  { q: 'Onde fica a clínica em Marília?', a: 'Na Av. Carlos Gomes, 113, no Centro. O endereço aparece com mapa na página de unidades.' },
+  { q: 'Onde fica a clínica em Marília?', a: 'Na Av. Carlos Gomes, 113, no Centro. O endereço e o link para o mapa estão na página de unidades.' },
   { q: 'Existe atendimento em Garça?', a: 'Sim. A Neo Clínica atende também em Garça, com agenda própria. Endereço e horários são confirmados no agendamento.' },
   { q: 'Vocês fazem teleconsulta?', a: null, pend: 'Disponibilidade de teleconsulta por área a confirmar.' },
   { q: 'O que levo na primeira consulta?', a: 'Documento com foto, exames recentes, a lista de medicamentos em uso e, para crianças, a caderneta e o cartão de vacinas. Cada área tem uma orientação específica na sua página.' },

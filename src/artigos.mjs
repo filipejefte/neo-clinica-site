@@ -28,7 +28,7 @@ export const ARTIGOS = [
 <li>uma a cada duas semanas entre a 28ª e a 36ª semana;</li>
 <li>uma por semana a partir da 36ª semana até o parto.</li>
 </ul>
-<p>Esse calendário é um ponto de partida. Gestações com condições como hipertensão, diabetes ou gemelaridade pedem consultas mais frequentes, definidas caso a caso.</p>
+<p>Esse calendário é um ponto de partida. Gestações com condições como hipertensão, diabetes ou gravidez de gêmeos pedem consultas mais frequentes, definidas caso a caso.</p>
 <h2>O que acontece na primeira consulta</h2>
 <p>A primeira consulta é a mais longa. O médico conversa sobre o histórico de saúde da gestante e da família, gestações anteriores, medicamentos e hábitos. Mede pressão, peso e altura, e solicita os exames iniciais: tipagem sanguínea, hemograma, glicemia, sorologias, exame de urina e o primeiro ultrassom, entre outros.</p>
 <p>É também o momento de tirar dúvidas sobre enjoo, cansaço, sono e o que pode ou não ser feito nas próximas semanas.</p>
@@ -41,7 +41,7 @@ export const ARTIGOS = [
 <li>dor de cabeça intensa, visão embaçada ou inchaço repentino de rosto e mãos;</li>
 <li>febre, ardência ao urinar ou diminuição dos movimentos do bebê depois da 28ª semana.</li>
 </ul>
-<p>Na dúvida, entre em contato. Uma mensagem a mais é sempre melhor do que um sinal ignorado.</p>`
+<p>Diante de qualquer um desses sinais, procure atendimento de urgência imediatamente, sem esperar a próxima consulta: ligue 192 (SAMU) ou vá à maternidade de referência. Para dúvidas que não são sinal de alerta, fale com a clínica.</p>`
   },
   {
     slug: 'teste-do-pezinho-primeiros-dias',
@@ -67,11 +67,11 @@ export const ARTIGOS = [
     slug: 'lavagem-nasal-em-bebes',
     area: 'pediatria-e-neonatologia',
     titulo: 'Lavagem nasal em bebês: como fazer com segurança',
-    resumo: 'Soro fisiológico, seringa sem agulha e uma posição correta resolvem a maior parte dos narizes entupidos. Veja o passo a passo e os sinais de alerta.',
+    resumo: 'Soro fisiológico, seringa sem agulha e a posição certa ajudam a aliviar o nariz entupido. Veja o passo a passo e os sinais de alerta.',
     data: '2026-07-22',
     leitura: 3,
     corpo: `
-<p>Bebês respiram principalmente pelo nariz, e um nariz entupido atrapalha mamar, dormir e respirar com conforto. A lavagem nasal com soro fisiológico é a forma mais simples e segura de aliviar a obstrução, e pode ser feita em casa quantas vezes for necessário.</p>
+<p>Bebês respiram principalmente pelo nariz, e um nariz entupido atrapalha mamar, dormir e respirar com conforto. A lavagem nasal com soro fisiológico é uma medida simples que ajuda a aliviar a obstrução, e pode ser feita em casa quantas vezes for necessário.</p>
 <h2>O que você precisa</h2>
 <ul>
 <li>soro fisiológico a 0,9%, em temperatura ambiente;</li>
@@ -83,14 +83,14 @@ export const ARTIGOS = [
 <ol>
 <li>Lave as mãos. Aspire o soro com a seringa e retire o ar.</li>
 <li>Deite o bebê de lado, ou sente-o com o corpo levemente inclinado para a frente, sempre com a cabeça mais alta que o tronco. Não deite o bebê de costas com a cabeça para trás.</li>
-<li>Encoste a ponta da seringa na entrada da narina que ficou por cima e aplique o soro de uma vez, com firmeza, mas sem forçar. O líquido sai pela outra narina ou pela boca, trazendo a secreção.</li>
-<li>Vire o bebê para o outro lado e repita na outra narina.</li>
+<li>Com o bebê deitado de lado, encoste a ponta da seringa na entrada da narina de cima. Com o bebê sentado e inclinado para a frente, aplique em uma narina de cada vez. Nos dois casos, aplique o soro de uma vez, com firmeza, mas sem forçar. O líquido sai pela outra narina ou pela boca, trazendo a secreção.</li>
+<li>Deitado, vire o bebê para o outro lado e repita. Sentado, repita na outra narina.</li>
 <li>Limpe o excesso com a toalha. O choro é comum e passa logo; ele não indica que algo deu errado.</li>
 </ol>
 <h2>Quantas vezes por dia</h2>
 <p>Não há limite rígido. Faça antes das mamadas e antes de dormir, e sempre que a respiração ficar ruidosa. Em resfriados, a lavagem pode ser repetida várias vezes ao dia.</p>
 <h2>Quando procurar o pediatra</h2>
-<p>A lavagem alivia sintomas, mas não trata infecções. Procure atendimento se o bebê apresentar febre persistente, dificuldade para respirar (afundamento das costelas, respiração muito rápida, chiado), recusa das mamadas, sonolência fora do comum ou secreção com sangue. Em bebês com menos de três meses, qualquer febre deve ser avaliada no mesmo dia.</p>`
+<p>A lavagem alivia sintomas, mas não trata infecções. Procure atendimento se o bebê apresentar febre persistente, dificuldade para respirar (afundamento das costelas, respiração muito rápida, chiado), recusa das mamadas, sonolência fora do comum ou secreção com sangue. Em bebês com menos de três meses, qualquer febre exige avaliação médica imediata: procure o pronto-socorro sem esperar.</p>`
   },
   {
     slug: 'colica-do-bebe-o-que-ajuda',
@@ -111,11 +111,11 @@ export const ARTIGOS = [
 <li>Banho morno e massagem suave na barriga, em movimentos circulares no sentido horário.</li>
 <li>Movimento de bicicleta com as perninhas, com o bebê deitado de costas.</li>
 <li>Verificar a pega na amamentação, para reduzir o ar engolido, e fazer o bebê arrotar após as mamadas.</li>
-<li>Revezar quem cuida. O choro prolongado esgota, e um adulto descansado acalma melhor.</li>
+<li>Revezar quem cuida, porque o choro prolongado esgota.</li>
 </ul>
 <p>Chás, gotas e medicamentos só devem ser usados com orientação do pediatra. Muitos produtos vendidos para cólica não têm comprovação e alguns não são seguros para bebês.</p>
 <h2>Quando procurar o pediatra</h2>
-<p>Procure avaliação se o choro vier acompanhado de febre, vômitos em jato, sangue nas fezes, barriga muito distendida e dura, recusa das mamadas, sonolência excessiva ou pouco ganho de peso. Também vale marcar consulta quando o padrão do choro mudar de repente, ou quando a família estiver no limite. Cuidar de quem cuida faz parte do tratamento.</p>`
+<p>Procure avaliação se o choro vier acompanhado de febre, vômitos em jato, sangue nas fezes, barriga muito distendida e dura, recusa das mamadas, sonolência excessiva ou pouco ganho de peso. Também vale marcar consulta quando o padrão do choro mudar de repente. Se a família estiver exausta, diga isso na consulta: faz parte do que o pediatra precisa saber.</p>`
   },
   {
     slug: 'ansiedade-burnout-ou-cansaco',
@@ -133,17 +133,17 @@ export const ARTIGOS = [
 <h2>Burnout</h2>
 <p>O burnout é um esgotamento ligado ao trabalho. Tem três marcas: exaustão que não melhora com descanso, distanciamento ou cinismo em relação ao que se faz, e sensação de que o próprio desempenho caiu. Diferente da depressão, os sintomas costumam estar concentrados na esfera profissional, pelo menos no começo.</p>
 <h2>Depressão</h2>
-<p>Na depressão, o humor triste ou vazio e a perda de interesse se estendem a todas as áreas da vida, por pelo menos duas semanas, quase todos os dias. Podem vir com alterações de sono e apetite, lentidão, dificuldade de concentração, culpa e pensamentos de que a vida não vale a pena. Se esse último sinal aparecer, procure ajuda no mesmo dia. O CVV atende pelo telefone 188, 24 horas, gratuitamente.</p>
+<p>Na depressão, o humor triste ou vazio e a perda de interesse se estendem a todas as áreas da vida, por pelo menos duas semanas, quase todos os dias. Podem vir com alterações de sono e apetite, lentidão, dificuldade de concentração, culpa e pensamentos de que a vida não vale a pena. Se esse último sinal aparecer, procure ajuda imediatamente: ligue 188, o CVV (Centro de Valorização da Vida), que atende 24 horas e de graça, ou vá ao pronto-socorro mais próximo. Não espere a próxima consulta.</p>
 <h2>E o TDAH em adultos?</h2>
-<p>Dificuldade de concentração, esquecimentos, desorganização e impulsividade que existem desde a infância e persistem na vida adulta podem indicar TDAH. O diagnóstico é clínico e exige uma avaliação cuidadosa, porque ansiedade, depressão e privação de sono produzem sintomas parecidos.</p>
+<p>Dificuldade de concentração, esquecimentos, desorganização e impulsividade que existem desde a infância e persistem na vida adulta podem indicar TDAH, o transtorno de déficit de atenção e hiperatividade. O diagnóstico é clínico e exige uma avaliação cuidadosa, porque ansiedade, depressão e privação de sono produzem sintomas parecidos.</p>
 <h2>Quando buscar ajuda</h2>
-<p>Procure avaliação médica quando os sintomas durarem mais de duas semanas, quando atrapalharem trabalho, estudo, sono ou relacionamentos, ou quando as estratégias de sempre já não funcionarem. A primeira consulta é uma conversa longa, sem pressa. O plano de cuidado é construído em conjunto e pode incluir psicoterapia, mudanças de rotina, medicamento ou a combinação deles. Pedir ajuda cedo encurta o caminho.</p>`
+<p>Procure avaliação médica quando os sintomas durarem mais de duas semanas, quando atrapalharem trabalho, estudo, sono ou relacionamentos, ou quando as estratégias de sempre já não funcionarem. A primeira consulta é uma conversa longa, sem pressa. O plano de cuidado é construído em conjunto e pode incluir psicoterapia, mudanças de rotina, medicamento ou a combinação deles.</p>`
   },
   {
     slug: 'hipertensao-depois-dos-60',
     area: 'clinica-medica-e-geriatria',
-    titulo: 'Hipertensão depois dos 60: o acompanhamento que faz diferença no dia a dia',
-    resumo: 'Pressão alta não dói, e por isso é fácil deixar de lado. Veja como medir em casa, o que muda com a idade e por que o ajuste dos remédios precisa de acompanhamento.',
+    titulo: 'Hipertensão depois dos 60: como medir em casa e por que o acompanhamento não pode parar',
+    resumo: 'Pressão alta não dói, e por isso o tratamento é fácil de abandonar. Veja como medir em casa, o que muda com a idade e por que o ajuste dos remédios precisa de acompanhamento.',
     data: '2026-06-24',
     leitura: 4,
     corpo: `

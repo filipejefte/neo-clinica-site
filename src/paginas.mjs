@@ -13,6 +13,20 @@ const sede = UNIDADES.find(u => u.principal);
 const garca = UNIDADES.find(u => !u.principal);
 const areaPor = (slug) => AREAS.find(a => a.slug === slug);
 
+/* A pagina de contato repetia as sete perguntas da inicial. Fica so o que e
+   duvida de contato; o resto continua na inicial. */
+const FAQ_CONTATO = [
+  'Como marco uma consulta?',
+  'A clínica atende convênios?',
+  'Vocês fazem teleconsulta?',
+  'A clínica atende urgências?'
+];
+
+/* Tempo de leitura calculado do proprio texto, a 200 palavras por minuto.
+   Os valores fixados a mao em artigos.mjs davam cerca do dobro do real. */
+const minutos = (art) => Math.max(1, Math.round(
+  art.corpo.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length / 200));
+
 const dataLonga = (iso) => {
   const [a, m, d] = iso.split('-').map(Number);
   const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -43,20 +57,20 @@ const ldCrumbs = (ctx, itens) => ({
 const areaCard = (a, rel) => `
 <article class="card card--area">
   <span class="card__icon">${ICON[a.icone]}</span>
-  <p class="eyebrow">${esc(a.curto)}</p>
+  <p class="tag">${esc(a.curto)}</p>
   <h3 class="card__title"><a href="${rel}areas/${a.slug}.html">${esc(a.nome)}</a></h3>
   <p>${esc(a.resumo)}</p>
   <span class="card__more">Saiba mais ${ICON.arrow}</span>
 </article>`;
 
-const artigoCard = (art, rel) => {
+const artigoCard = (art, rel, nivel = 'h3') => {
   const a = areaPor(art.area);
   return `
 <article class="card card--post">
-  <p class="eyebrow">${esc(a.nome)}</p>
-  <h3 class="card__title"><a href="${rel}orientacoes/${art.slug}.html">${esc(art.titulo)}</a></h3>
+  <p class="tag">${esc(a.nome)}</p>
+  <${nivel} class="card__title"><a href="${rel}orientacoes/${art.slug}.html">${esc(art.titulo)}</a></${nivel}>
   <p>${esc(art.resumo)}</p>
-  <p class="card__meta"><time datetime="${art.data}">${dataLonga(art.data)}</time> · ${art.leitura} min de leitura</p>
+  <p class="card__meta"><time datetime="${art.data}">${dataLonga(art.data)}</time> · ${minutos(art)} min de leitura</p>
 </article>`;
 };
 
@@ -85,7 +99,7 @@ const ctaBand = (rel, titulo = 'Fale com a equipe', texto = 'Tire dúvidas sobre
 
 const unidadeCard = (u, ctx, rel, escuro) => `
 <article class="unit ${escuro ? 'unit--dark' : 'unit--soft'}">
-  <p class="eyebrow">${u.principal ? 'Sede' : 'Atendimento também em'}</p>
+  <p class="tag">${u.principal ? 'Sede' : 'Atendimento também em'}</p>
   <h3 class="unit__title">${esc(u.nome)}</h3>
   <p class="unit__addr">${ICON.pin}<span>${enderecoLinha(u, ctx)}</span></p>
   <div class="unit__hours">${ICON.clock}${horarioLista(u, ctx)}</div>
@@ -116,7 +130,7 @@ export function inicio(ctx) {
     secao: 'inicio',
     titulo: 'Início',
     tituloOg: `${CLINICA.nome} | ${CLINICA.slogan}`,
-    descricao: 'Neo Clínica, centro de saúde e especialidades em Marília e Garça. Ginecologia e obstetrícia, pediatria e neonatologia, clínica médica e geriatria e saúde mental. Agende pelo WhatsApp.'
+    descricao: 'Neo Clínica, centro de saúde e especialidades em Marília e Garça. Ginecologia e obstetrícia, pediatria e neonatologia, clínica médica e geriatria, e saúde mental. Agende pelo WhatsApp.'
   };
   const body = `
 <section class="hero">
@@ -124,7 +138,7 @@ export function inicio(ctx) {
     <div class="hero__copy">
       <p class="eyebrow eyebrow--rose">Centro de saúde e especialidades · Marília e Garça</p>
       <h1 class="hero__title">Cuidado médico para cada fase da vida, <em>perto de casa.</em></h1>
-      <p class="lead">Ginecologia e obstetrícia, pediatria e neonatologia, clínica médica e geriatria e saúde mental, em consultas com tempo para ouvir e explicar. No centro de Marília e agora também em Garça.</p>
+      <p class="lead">Ginecologia e obstetrícia, pediatria e neonatologia, clínica médica e geriatria, e saúde mental, em consultas com tempo para ouvir e explicar. No centro de Marília e agora também em Garça.</p>
       <div class="hero__actions">
         ${btnWa('Agendar pelo WhatsApp')}
         <a class="btn btn--ghost" href="${rel}areas.html">Ver áreas de atendimento</a>
@@ -146,7 +160,6 @@ export function inicio(ctx) {
 <section class="section" id="areas">
   <div class="shell">
     <div class="section__head">
-      <p class="eyebrow">Áreas de atendimento</p>
       <h2 class="section__title">Da gestação à maturidade, na mesma clínica</h2>
       <p class="section__intro">Quatro áreas que se complementam. A mesma família pode acompanhar a gravidez, a primeira consulta do bebê, a pressão dos avós e a saúde mental de quem cuida de todos.</p>
     </div>
@@ -157,9 +170,8 @@ export function inicio(ctx) {
 <section class="section section--soft" id="como-agendar">
   <div class="shell">
     <div class="section__head">
-      <p class="eyebrow">Como agendar</p>
-      <h2 class="section__title">Marcar consulta leva menos de um minuto</h2>
-      <p class="section__intro">Sem cadastro, sem aplicativo. Uma mensagem no WhatsApp e a equipe cuida do resto.</p>
+      <h2 class="section__title">Agendar é só mandar uma mensagem</h2>
+      <p class="section__intro">Sem cadastro e sem formulário. Você manda uma mensagem no WhatsApp e a equipe responde com os horários.</p>
     </div>
     <ol class="steps">${PASSOS.map((s, i) => `
       <li class="step">
@@ -169,8 +181,8 @@ export function inicio(ctx) {
       </li>`).join('')}
     </ol>
     <div class="section__actions">
-      ${btnWa('Começar pelo WhatsApp')}
-      <a class="btn btn--ghost" href="${rel}agendamento.html">Montar a mensagem de agendamento</a>
+      ${btnWa('Agendar pelo WhatsApp')}
+      <a class="btn btn--ghost" href="${rel}agendamento.html">Montar a mensagem</a>
     </div>
   </div>
 </section>
@@ -178,7 +190,6 @@ export function inicio(ctx) {
 <section class="section" id="unidades">
   <div class="shell">
     <div class="section__head">
-      <p class="eyebrow">Unidades</p>
       <h2 class="section__title">Duas cidades, o mesmo jeito de atender</h2>
       <p class="section__intro">A sede fica no centro de Marília, de fácil acesso. Em Garça, o atendimento tem agenda própria.</p>
     </div>
@@ -193,8 +204,7 @@ export function inicio(ctx) {
   <div class="shell">
     <div class="section__head section__head--row">
       <div>
-        <p class="eyebrow">Orientações</p>
-        <h2 class="section__title">Respostas para as dúvidas que mais aparecem no consultório</h2>
+          <h2 class="section__title">Respostas para as dúvidas que mais aparecem no consultório</h2>
       </div>
       <a class="btn btn--ghost" href="${rel}orientacoes.html">Todas as orientações ${ICON.arrow}</a>
     </div>
@@ -205,7 +215,6 @@ export function inicio(ctx) {
 <section class="section" id="perguntas">
   <div class="shell shell--narrow">
     <div class="section__head">
-      <p class="eyebrow">Perguntas frequentes</p>
       <h2 class="section__title">Antes de marcar</h2>
     </div>
     ${faqList(FAQ, ctx)}
@@ -228,7 +237,6 @@ export function areas(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Áreas de atendimento']])}
-    <p class="eyebrow eyebrow--rose">Áreas de atendimento</p>
     <h1 class="page-head__title">Quatro áreas, uma clínica para a família inteira</h1>
     <p class="lead">Cada área tem uma página com o que é atendido, o que levar na primeira consulta e as perguntas mais comuns. Se não souber por onde começar, mande uma mensagem e a equipe orienta.</p>
   </div>
@@ -238,7 +246,7 @@ export function areas(ctx) {
     <div class="grid grid--2">${AREAS.map(a => `
       <article class="card card--area card--wide">
         <span class="card__icon">${ICON[a.icone]}</span>
-        <p class="eyebrow">${esc(a.curto)}</p>
+        <p class="tag">${esc(a.curto)}</p>
         <h2 class="card__title"><a href="${rel}areas/${a.slug}.html">${esc(a.nome)}</a></h2>
         <p>${esc(a.para)}</p>
         <ul class="ticks">${a.itens.slice(0, 4).map(i => `<li>${ICON.check}<span>${esc(i)}</span></li>`).join('')}</ul>
@@ -290,15 +298,15 @@ export function area(ctx, a) {
     </div>
     <aside class="split__aside">
       <div class="note">
-        <p class="eyebrow">Primeira consulta</p>
+        <p class="tag">Primeira consulta</p>
         <h3 class="note__title">O que levar</h3>
         <p>${esc(a.primeiraConsulta)}</p>
       </div>
       <div class="note note--soft">
-        <p class="eyebrow">Onde</p>
+        <p class="tag">Onde</p>
         <p>${ICON.pin}<span>${esc(sede.nome)}: ${enderecoLinha(sede, ctx)}</span></p>
         <p>${ICON.pin}<span>${esc(garca.nome)}: ${ctx.pend(null, 'áreas atendidas em Garça a confirmar')}</span></p>
-        <p>${ICON.clock}<span>${esc(sede.horario[0].dias)}, ${esc(sede.horario[0].horas)}</span></p>
+        <p>${ICON.clock}<span>${esc(sede.nome)}: ${esc(sede.horario[0].dias).toLowerCase()}, ${esc(sede.horario[0].horas)}</span></p>
       </div>
     </aside>
   </div>
@@ -309,8 +317,7 @@ ${relacionados.length ? `
   <div class="shell">
     <div class="section__head section__head--row">
       <div>
-        <p class="eyebrow">Orientações</p>
-        <h2 class="section__title">Orientações em ${esc(a.nome)}</h2>
+          <h2 class="section__title">Orientações em ${esc(a.nome)}</h2>
       </div>
       <a class="btn btn--ghost" href="${rel}orientacoes.html">Todas as orientações ${ICON.arrow}</a>
     </div>
@@ -318,10 +325,12 @@ ${relacionados.length ? `
   </div>
 </section>` : ''}
 
-<section class="section">
+<section class="section section--tight">
   <div class="shell">
-    <p class="eyebrow">Outras áreas</p>
-    <div class="grid grid--3">${outras.map(x => areaCard(x, rel)).join('')}</div>
+    <div class="section__head section__head--row">
+      <h2 class="h2">Não era esta a área que você procurava?</h2>
+    </div>
+    <ul class="arealinks">${outras.map(x => `<li><a href="${rel}areas/${x.slug}.html">${esc(x.nome)} ${ICON.arrow}</a></li>`).join('')}</ul>
   </div>
 </section>
 ${ctaBand(rel)}`;
@@ -353,7 +362,6 @@ export function equipe(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Equipe']])}
-    <p class="eyebrow eyebrow--rose">Equipe</p>
     <h1 class="page-head__title">Médicas e médicos que atendem com tempo para explicar</h1>
     <p class="lead">Quatro áreas que conversam entre si. Cada profissional é identificado com nome, CRM e registro de qualificação (RQE), como determina a Resolução CFM 2.336/2023.</p>
   </div>
@@ -367,7 +375,7 @@ export function equipe(ctx) {
         <div class="person__head">
           <span class="person__avatar" aria-hidden="true">${ICON[a.icone]}</span>
           <div>
-            <p class="eyebrow">${esc(a.nome)}</p>
+            <p class="tag">${esc(a.nome)}</p>
             <h2 class="card__title">${ctx.pend(m.nome, 'Profissional a confirmar')}</h2>
           </div>
         </div>
@@ -429,7 +437,6 @@ export function unidades(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Unidades']])}
-    <p class="eyebrow eyebrow--rose">Unidades</p>
     <h1 class="page-head__title">Onde a Neo Clínica atende</h1>
     <p class="lead">A sede fica no centro de Marília, em endereço de fácil acesso. Em Garça, o atendimento acontece em dias definidos, com agenda própria. Nas duas cidades, o agendamento é pelo mesmo WhatsApp.</p>
   </div>
@@ -454,9 +461,8 @@ export function agendamento(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Agendamento']])}
-    <p class="eyebrow eyebrow--rose">Agendamento</p>
     <h1 class="page-head__title">Agende sua consulta pelo WhatsApp</h1>
-    <p class="lead">Monte a mensagem abaixo e envie. A equipe responde com os horários disponíveis na unidade escolhida. Prefere ligar? O telefone fixo está no fim da página.</p>
+    <p class="lead">Monte a mensagem abaixo e envie. A equipe responde com os horários disponíveis na unidade escolhida. Prefere ligar? O telefone fixo está ao lado.</p>
   </div>
 </section>
 
@@ -476,24 +482,25 @@ export function agendamento(ctx) {
         <div class="chips">${chip('periodo', 'Manhã', 'Manhã', true)}${chip('periodo', 'Tarde', 'Tarde', false)}${chip('periodo', 'Qualquer horário', 'Qualquer horário', false)}</div>
       </fieldset>
       <div class="composer__out">
-        <p class="eyebrow">Sua mensagem</p>
+        <p class="tag">Sua mensagem</p>
         <output class="composer__preview" data-composer-preview aria-live="polite">${esc(WA_PADRAO)}</output>
-        <a class="btn btn--primary btn--lg" href="${wa(WA_PADRAO)}" ${EXT} data-composer-link>${ICON.whatsapp}<span>Enviar pelo WhatsApp</span></a>
+        <a class="btn btn--primary btn--lg" href="${wa(WA_PADRAO)}" ${EXT} data-composer-link>${ICON.whatsapp}<span>Agendar pelo WhatsApp</span></a>
+        <p class="fineprint semjs">Se as opções acima não estiverem funcionando, escreva a área, a unidade e o período direto na conversa: a equipe responde igual.</p>
         <p class="fineprint">Nada do que você escolhe aqui fica guardado neste site. A mensagem só existe quando você a envia pelo WhatsApp, para o número ${esc(CLINICA.whatsappFormatado)}.</p>
       </div>
     </div>
     <aside class="split__aside">
       <div class="note">
-        <p class="eyebrow">Como funciona</p>
+        <p class="tag">Como funciona</p>
         <ol class="minilist">${PASSOS.map(s => `<li><strong>${esc(s.titulo)}.</strong> ${esc(s.texto)}</li>`).join('')}</ol>
       </div>
       <div class="note note--soft">
-        <p class="eyebrow">Prefere ligar?</p>
+        <p class="tag">Prefere ligar?</p>
         <p><a class="biglink" href="tel:${CLINICA.telefoneHref}">${ICON.phone}<span>${esc(CLINICA.telefone)}</span></a></p>
         <p class="muted">${esc(sede.horario[0].dias)}, ${esc(sede.horario[0].horas)}.</p>
       </div>
       <div class="note note--soft">
-        <p class="eyebrow">Convênios</p>
+        <p class="tag">Convênios</p>
         <p>${ctx.pend(CLINICA.convenios, 'Convênios aceitos e formas de pagamento a confirmar')}</p>
       </div>
     </aside>
@@ -503,7 +510,7 @@ export function agendamento(ctx) {
 <section class="section section--soft">
   <div class="shell">
     <div class="section__head">
-      <p class="eyebrow">Primeira consulta</p>
+      <p class="tag">Primeira consulta</p>
       <h2 class="section__title">O que levar, por área</h2>
     </div>
     <div class="grid grid--2">${AREAS.map(a => `
@@ -530,14 +537,13 @@ export function orientacoes(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Orientações']])}
-    <p class="eyebrow eyebrow--rose">Orientações</p>
     <h1 class="page-head__title">O que a equipe mais explica no consultório</h1>
     <p class="lead">Textos curtos, escritos para responder às dúvidas que aparecem com mais frequência. Eles têm caráter informativo e não substituem a consulta.</p>
   </div>
 </section>
 <section class="section section--tight">
   <div class="shell">
-    <div class="grid grid--3">${ARTIGOS.map(a => artigoCard(a, rel)).join('')}</div>
+    <div class="grid grid--3">${ARTIGOS.map(a => artigoCard(a, rel, 'h2')).join('')}</div>
   </div>
 </section>
 ${ctaBand(rel, 'Ficou com uma dúvida que não está aqui?', 'Mande pelo WhatsApp. Se for caso de consulta, a equipe já indica a área e os horários.')}`;
@@ -562,13 +568,13 @@ export function orientacao(ctx, art) {
       <p class="eyebrow eyebrow--rose"><a href="${rel}areas/${a.slug}.html">${esc(a.nome)}</a></p>
       <h1 class="page-head__title">${esc(art.titulo)}</h1>
       <p class="lead">${esc(art.resumo)}</p>
-      <p class="post__meta"><time datetime="${art.data}">${dataLonga(art.data)}</time> · ${art.leitura} min de leitura · Equipe Neo Clínica</p>
+      <p class="post__meta"><time datetime="${art.data}">${dataLonga(art.data)}</time> · ${minutos(art)} min de leitura<br>Escrito pela equipe da Neo Clínica</p>
     </div>
   </header>
   <div class="shell shell--narrow">
     <div class="prose">${art.corpo}</div>
     <div class="note note--soft post__disclaimer">
-      <p class="eyebrow">Aviso</p>
+      <p class="tag">Aviso</p>
       <p>Este texto tem caráter educativo e não substitui a consulta médica. Cada caso é avaliado individualmente. Em situação de urgência, ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</p>
     </div>
     <div class="post__cta">
@@ -581,7 +587,6 @@ export function orientacao(ctx, art) {
   <div class="shell">
     <div class="section__head section__head--row">
       <div>
-        <p class="eyebrow">Continue lendo</p>
         <h2 class="section__title">Outras orientações</h2>
       </div>
       <a class="btn btn--ghost" href="${rel}orientacoes.html">Todas as orientações ${ICON.arrow}</a>
@@ -621,7 +626,6 @@ export function contato(ctx) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(rel, [['Contato']])}
-    <p class="eyebrow eyebrow--rose">Contato</p>
     <h1 class="page-head__title">Fale com a Neo Clínica</h1>
     <p class="lead">Para agendar, tirar dúvidas ou remarcar, o caminho mais rápido é o WhatsApp. O telefone fixo atende nos dias e horários da clínica.</p>
   </div>
@@ -629,24 +633,25 @@ export function contato(ctx) {
 
 <section class="section section--tight">
   <div class="shell">
-    <div class="grid grid--3">
-      <a class="card card--contact" href="${wa(WA_PADRAO)}" ${EXT}>
+    <div class="ways">
+      <a class="card card--contact card--lead" href="${wa(WA_PADRAO)}" ${EXT}>
         <span class="card__icon">${ICON.whatsapp}</span>
-        <p class="eyebrow">WhatsApp</p>
+        <p class="tag">WhatsApp, o caminho mais rápido</p>
         <span class="card__title">${esc(CLINICA.whatsappFormatado)}</span>
-        <p>Agendamentos, dúvidas e remarcações. Abre uma conversa com a equipe.</p>
+        <p>Agendamentos, dúvidas e remarcações. Abre uma conversa direta com a equipe, sem cadastro.</p>
+        <span class="card__more">Abrir conversa ${ICON.arrow}</span>
       </a>
       <a class="card card--contact" href="tel:${CLINICA.telefoneHref}">
         <span class="card__icon">${ICON.phone}</span>
-        <p class="eyebrow">Telefone fixo</p>
+        <p class="tag">Telefone fixo</p>
         <span class="card__title">${esc(CLINICA.telefone)}</span>
         <p>${esc(sede.horario[0].dias)}, ${esc(sede.horario[0].horas)}.</p>
       </a>
       <a class="card card--contact" href="${CLINICA.instagram}" ${EXT}>
         <span class="card__icon">${ICON.instagram}</span>
-        <p class="eyebrow">Instagram</p>
+        <p class="tag">Instagram</p>
         <span class="card__title">${esc(CLINICA.instagramUsuario)}</span>
-        <p>Novidades da equipe, orientações e avisos de agenda.</p>
+        <p>Novidades da equipe e avisos de agenda.</p>
       </a>
     </div>
     <div class="official">
@@ -663,7 +668,6 @@ export function contato(ctx) {
 <section class="section section--soft">
   <div class="shell">
     <div class="section__head">
-      <p class="eyebrow">Unidades</p>
       <h2 class="section__title">Onde estamos</h2>
     </div>
     <div class="grid grid--2">
@@ -676,10 +680,9 @@ export function contato(ctx) {
 <section class="section">
   <div class="shell shell--narrow">
     <div class="section__head">
-      <p class="eyebrow">Perguntas frequentes</p>
       <h2 class="section__title">Antes de entrar em contato</h2>
     </div>
-    ${faqList(FAQ, ctx)}
+    ${faqList(FAQ.filter(f => FAQ_CONTATO.includes(f.q)), ctx)}
   </div>
 </section>`;
   return { p, body, ld: [ldCrumbs(ctx, [['Contato', 'contato.html']])] };
@@ -697,7 +700,6 @@ export function privacidade(ctx) {
 <section class="page-head page-head--post">
   <div class="shell shell--narrow">
     ${crumbs(rel, [['Privacidade']])}
-    <p class="eyebrow eyebrow--rose">Privacidade</p>
     <h1 class="page-head__title">Aviso de privacidade</h1>
     <p class="lead">Este site foi feito para informar e facilitar o contato. Ele não usa cookies de rastreamento, não tem contadores de visita de terceiros e não guarda nada do que você digita.</p>
   </div>

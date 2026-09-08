@@ -165,6 +165,8 @@ for (const page of pages) {
     [/melhor\s+(cl[íi]nica|m[ée]dic|equipe|atendimento)/i, 'superlativo/comparativo'],
     [/n[ºo°]?\s*1\s+(em|de)\b|l[íi]der\s+em|refer[êe]ncia\s+em/i, 'autoatribuição de liderança'],
     [/\bcura(r|do|da)?\b|milagr/i, 'promessa de cura'],
+    [/resolvem?\s+(a\s+maior\s+parte|todos|tudo|qualquer)/i, 'promessa de resolução'],
+    [/\bforma\s+mais\s+(simples|segura|eficaz|r[áa]pida|f[áa]cil)/i, 'superlativo de método'],
     [/promo[çc][ãa]o|desconto|parcel|R\$\s?\d/i, 'preço, desconto ou condição de pagamento'],
     [/consulta\s+gr[áa]tis|consulta\s+gratuita|sem\s+custo/i, 'oferta de gratuidade'],
     [/antes\s+e\s+depois/i, 'imagem ou promessa antes e depois'],

@@ -8,19 +8,24 @@
    ========================================================================= */
 
 /* ---------- 0. fontes (hospedadas no próprio site) ---------------------- */
+/* Literata no lugar da Fraunces. A Fraunces afina muito o traço em tamanho de
+   display (eixo óptico) e a serifa fica frágil para um público que inclui
+   pessoas idosas; a Literata foi desenhada para leitura em tela, tem altura-x
+   grande, aberturas abertas e traço firme, e as formas arredondadas
+   conversam com o wordmark do logotipo. */
 @font-face{
-  font-family:"Fraunces";
+  font-family:"Literata";
   font-style:normal;
   font-weight:300 700;
   font-display:swap;
-  src:url("../fonts/fraunces.woff2") format("woff2");
+  src:url("../fonts/literata.woff2") format("woff2");
 }
 @font-face{
-  font-family:"Fraunces";
+  font-family:"Literata";
   font-style:italic;
   font-weight:300 700;
   font-display:swap;
-  src:url("../fonts/fraunces-italic.woff2") format("woff2");
+  src:url("../fonts/literata-italic.woff2") format("woff2");
 }
 @font-face{
   font-family:"Figtree";
@@ -28,13 +33,6 @@
   font-weight:300 800;
   font-display:swap;
   src:url("../fonts/figtree.woff2") format("woff2");
-}
-@font-face{
-  font-family:"Figtree";
-  font-style:italic;
-  font-weight:300 800;
-  font-display:swap;
-  src:url("../fonts/figtree-italic.woff2") format("woff2");
 }
 /* Só para o wordmark do logotipo. */
 @font-face{
@@ -62,18 +60,21 @@
   --blush-2:#EBD6E5;
   --rule:#EADEE6;
   --rule-2:#D8C6D3;
+  /* limite de controle vazado: WCAG 1.4.11 pede 3:1 contra o fundo */
+  --control-line:#9A8AA0;
 
   --ink:#2E1F33;
   --ink-2:#584860;
-  --ink-3:#7A6A80;
-  --muted:#7A6A80;
+  /* escurecido para passar 4,5:1 tambem sobre --cream-2 e --blush */
+  --ink-3:#6B5B72;
+  --muted:#6B5B72;
 
   --plum:#64446E;
   --plum-2:#74527E;
   --plum-3:#85628F;
   --on-plum:#F8EFF5;
   --on-plum-2:#D3BDD3;
-  --on-plum-rule:#7B5A85;
+  --on-plum-rule:#D3BDD3;
 
   --rose:#C997B8;
   --rose-2:#D4A8C4;
@@ -87,7 +88,7 @@
   --focus:#8E4F79;
   --shadow:0 1px 2px rgba(42,28,46,.04), 0 18px 44px -24px rgba(59,33,64,.35);
 
-  --serif:"Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --serif:"Literata", "Iowan Old Style", "Charter", Georgia, serif;
   --sans:"Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --shell:1180px;
@@ -95,30 +96,43 @@
   --section:clamp(64px, 9vw, 120px);
   --radius:24px;
   --radius-sm:14px;
-  --measure:64ch;
+  /* ~70 caracteres por linha no corpo do texto. Em ch daria 1,42x isso. */
+  --measure:34rem;
 }
 
 /* ---------- 2. base ------------------------------------------------------ */
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+/* A escala inteira sai daqui. Em porcentagem, e nao em px, para respeitar
+   quem aumentou a fonte padrao do navegador: 106,25% de 16px da 17px. */
+html{font-size:106.25%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0;
   background:var(--cream);
   color:var(--ink);
   font-family:var(--sans);
-  font-size:16px;
-  line-height:1.6;
-  font-optical-sizing:auto;
+  font-size:1rem;
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+  /* A serifada hospedada ja vem instanciada no corte optico 14 (ver
+     tools/fontes.mjs), entao nao ha eixo para o navegador mexer. A
+     declaracao fica como garantia se a fonte variavel voltar. */
+  font-optical-sizing:none;
 }
 img,svg{display:inline-block;max-width:100%;vertical-align:middle}
 a{color:var(--rose-ink);text-decoration-thickness:1px;text-underline-offset:.16em}
 a:hover{color:var(--plum)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+/* nas superficies ameixa o anel calibrado para o creme fica em 1,37:1 */
+.band :focus-visible,.unit--dark :focus-visible,.mapcard :focus-visible{outline-color:var(--on-plum)}
 button{font:inherit;color:inherit}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.1;letter-spacing:-.012em;margin:0 0 .5em;color:var(--ink)}
+/* O eixo óptico fica travado: em "auto" o traço afina em tamanho grande e o
+   título perde peso na página. O ajuste fino de espacejamento vale só para os
+   tamanhos de display; em título pequeno, tracking negativo fecha as formas. */
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;margin:0 0 .5em;color:var(--ink)}
+h3,h4,.h3{line-height:1.28}
+h1,.hero__title,.page-head__title,.section__title,.h2--lg{letter-spacing:-.018em}
+h3,h4,.h3,.card__title,.faq__item summary{letter-spacing:-.004em}
 p{margin:0 0 1em}
 ul,ol{margin:0 0 1em;padding-left:1.2em}
 strong{font-weight:600}
@@ -126,21 +140,32 @@ small{font-size:.86em}
 .i{flex:none;vertical-align:-.18em}
 
 .shell{width:min(var(--shell), 100% - 2*var(--gutter));margin-inline:auto}
-.shell--narrow{width:min(760px, 100% - 2*var(--gutter))}
+.shell--narrow{width:min(680px, 100% - 2*var(--gutter))}
 .muted{color:var(--ink-3)}
-.fineprint{font-size:.86rem;color:var(--ink-3);max-width:60ch}
+.fineprint{font-size:.88rem;color:var(--ink-3);max-width:60ch}
 
 .skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--plum);color:var(--on-plum);padding:10px 14px;border-radius:10px}
 .skip:focus{top:12px}
 
 /* ---------- 3. tipografia utilitária ------------------------------------ */
+/* Dois papéis diferentes, dois desenhos diferentes. O rótulo de seção, em
+   caixa alta, ficou reservado ao cabeçalho de página e de seção; antes o
+   mesmo dispositivo aparecia 97 vezes no site e virava ruído. */
 .eyebrow{
-  font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink-3);margin:0 0 .9em
 }
 .eyebrow--rose{color:var(--rose-ink)}
 .eyebrow a{color:inherit;text-decoration:none}
 .eyebrow a:hover{text-decoration:underline}
+
+/* Rótulo dentro de um componente: identifica sem competir com o título. */
+.tag{
+  font-size:.8rem;font-weight:600;letter-spacing:0;text-transform:none;
+  color:var(--rose-ink);margin:0 0 .35em
+}
+.tag a{color:inherit;text-decoration:none}
+.tag a:hover{text-decoration:underline}
 .lead{font-size:clamp(1.05rem, 1.4vw, 1.22rem);line-height:1.6;color:var(--ink-2);max-width:var(--measure);margin-bottom:1.4em}
 .h2{font-size:clamp(1.6rem, 2.6vw, 2.1rem);margin-top:1.2em}
 .h2:first-child{margin-top:0}
@@ -151,27 +176,29 @@ small{font-size:.86em}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   padding:14px 22px;border-radius:999px;border:1.5px solid transparent;
-  font-weight:600;font-size:.95rem;line-height:1.15;text-decoration:none;
+  font-weight:600;font-size:.94rem;line-height:1.15;text-decoration:none;
   cursor:pointer;white-space:nowrap;transition:background .18s,color .18s,border-color .18s,transform .18s
 }
 .btn:hover{transform:translateY(-1px)}
 .btn--primary{background:var(--plum);color:var(--on-plum);border-color:var(--plum)}
 .btn--primary:hover{background:var(--plum-2);border-color:var(--plum-2);color:var(--on-plum)}
-.btn--ghost{background:transparent;color:var(--ink);border-color:var(--rule-2)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--control-line)}
 .btn--ghost:hover{border-color:var(--rose);color:var(--rose-ink)}
 .btn--light{background:var(--cream);color:var(--plum);border-color:var(--cream)}
 .btn--light:hover{background:var(--white);color:var(--plum)}
 .btn--outline{background:transparent;color:var(--on-plum);border-color:var(--on-plum-rule)}
 .btn--outline:hover{border-color:var(--on-plum-2);color:var(--on-plum)}
 .btn--sm{padding:10px 16px;font-size:.88rem}
-.btn--lg{padding:17px 28px;font-size:1.02rem}
+.btn--lg{padding:17px 28px;font-size:1rem}
 .btn--block{width:100%}
+/* Em tela estreita o rótulo quebra em vez de estourar o contêiner. */
+@media (max-width:430px){ .btn{white-space:normal;text-align:center} }
 
 /* ---------- 5. marcação "a confirmar" e faixa de prévia ----------------- */
 .pend{
   display:inline-block;padding:1px 8px;border-radius:7px;
   border:1px dashed var(--rose);background:var(--rose-soft);color:var(--rose-ink);
-  font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
   line-height:1.6;vertical-align:.08em;cursor:help
 }
 .pend--demo{cursor:default}
@@ -182,7 +209,7 @@ small{font-size:.86em}
 .ribbon .pend{background:#FFF6EC;border-color:var(--apricot);color:var(--apricot-ink)}
 @media (max-width:760px){
   .ribbon .shell{font-size:.8rem;line-height:1.4;padding:8px 0}
-  .ribbon .pend{font-size:.66rem}
+  .ribbon .pend{font-size:.72rem}
 }
 
 /* ---------- 6. cabeçalho ------------------------------------------------- */
@@ -224,8 +251,12 @@ small{font-size:.86em}
 .burger[aria-expanded="true"] svg:first-child{display:none}
 .burger[aria-expanded="true"] svg:last-child{display:block}
 
+/* A gaveta vive dentro do cabeçalho e abre a partir da base dele. Presa a um
+   valor fixo de topo, a faixa de prévia empurrava o cabeçalho e a gaveta
+   cobria o primeiro item do menu. */
 .drawer{
-  position:fixed;inset:84px 0 0 0;z-index:49;background:var(--cream);
+  position:absolute;top:100%;left:0;right:0;height:calc(100dvh - 100%);
+  z-index:49;background:var(--cream);border-top:1px solid var(--rule);
   padding:24px var(--gutter) 40px;overflow:auto;display:flex;flex-direction:column;gap:28px
 }
 .drawer[hidden]{display:none}
@@ -235,22 +266,29 @@ small{font-size:.86em}
 .drawer__foot{display:flex;flex-direction:column;gap:12px}
 body.drawer-open{overflow:hidden}
 
+/* A gaveta só existe com JavaScript (site.js marca .has-js na raiz). Sem ele
+   a navegação continua visível e apenas quebra em duas linhas: cabeçalho mais
+   alto é melhor do que site sem navegação. */
 @media (max-width:980px){
-  .nav{display:none}
-  .burger{display:inline-flex}
-  .site-head__cta .btn{display:none}
+  .has-js .nav{display:none}
+  .has-js .burger{display:inline-flex}
+  .nav{flex-wrap:wrap;gap:12px 20px;margin-left:0;width:100%;order:3;padding-bottom:12px}
 }
+/* O botão do cabeçalho só pode sair quando a barra fixa do rodapé entra. */
+@media (max-width:760px){ .site-head__cta .btn{display:none} }
 
 /* ---------- 7. hero ------------------------------------------------------ */
 .hero{padding:clamp(40px, 7vw, 88px) 0 clamp(40px, 6vw, 72px);overflow:hidden}
 .hero__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px, 6vw, 80px);align-items:center}
+/* A Literata é mais larga que a serifa anterior: no tamanho antigo o título
+   caía para quatro linhas. Calibrado para três linhas em 1280px. */
 .hero__title{
-  font-size:clamp(2.5rem, 5.4vw, 4.4rem);font-weight:450;line-height:1.02;
-  letter-spacing:-.02em;margin:0 0 .45em;max-width:14ch
+  font-size:clamp(2.15rem, 4.4vw, 3.5rem);font-weight:450;line-height:1.08;
+  letter-spacing:-.02em;margin:0 0 .5em;max-width:16ch
 }
 .hero__title em{font-style:italic;font-weight:400;color:var(--rose-ink)}
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin:1.6em 0}
-.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px;color:var(--ink-2);font-size:.92rem}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px;color:var(--ink-2);font-size:.94rem}
 .facts li{display:flex;align-items:center;gap:8px}
 .facts .i{color:var(--rose-ink)}
 
@@ -261,7 +299,7 @@ body.drawer-open{overflow:hidden}
 
 .chatmock{
   position:relative;width:min(360px, 100%);background:var(--white);border:1px solid var(--rule);
-  border-radius:20px;box-shadow:var(--shadow);overflow:hidden;font-size:.9rem
+  border-radius:20px;box-shadow:var(--shadow);overflow:hidden;font-size:.88rem
 }
 .chatmock__head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--plum);color:var(--on-plum);font-weight:600}
 .chatmock__head small{margin-left:auto;font-weight:500;color:var(--on-plum-2)}
@@ -284,7 +322,7 @@ body.drawer-open{overflow:hidden}
 .section__head{max-width:70ch;margin-bottom:clamp(28px, 4vw, 48px)}
 .section__head--row{max-width:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 .section__title{font-size:clamp(1.8rem, 3.4vw, 2.7rem);margin:0 0 .35em}
-.section__intro{color:var(--ink-2);font-size:1.05rem;max-width:60ch;margin:0}
+.section__intro{color:var(--ink-2);font-size:1.06rem;max-width:60ch;margin:0}
 .section__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px, 3vw, 40px)}
 
 .grid{display:grid;gap:clamp(16px, 2vw, 24px)}
@@ -303,7 +341,7 @@ body.drawer-open{overflow:hidden}
   transition:transform .2s,border-color .2s,box-shadow .2s
 }
 .card p{margin:0;color:var(--ink-2)}
-.card .eyebrow{margin:0}
+.card .eyebrow,.card .tag{margin:0}
 .card__icon{
   width:56px;height:56px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;
   background:var(--rose-soft);color:var(--rose-ink);margin-bottom:8px
@@ -315,19 +353,35 @@ body.drawer-open{overflow:hidden}
 .card__title a::after{content:"";position:absolute;inset:0}
 .card--area,.card--post,.card--person{position:relative}
 .card--area:hover,.card--post:hover,.card--contact:hover{transform:translateY(-3px);border-color:var(--rose-2);box-shadow:var(--shadow)}
-.card__more{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--rose-ink);margin-top:auto;padding-top:6px;font-size:.92rem;text-decoration:none}
+.card__more{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--rose-ink);margin-top:auto;padding-top:6px;font-size:.94rem;text-decoration:none}
 .card__more:hover{color:var(--plum)}
-.card__meta{font-size:.84rem;color:var(--ink-3)}
+.card__meta{font-size:.8rem;color:var(--ink-3)}
 .card__actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:8px;position:relative;z-index:1}
 .card--wide .card__title{font-size:1.7rem}
 .card--contact .card__title{font-family:var(--serif);font-size:1.5rem}
 .card--contact{cursor:pointer}
+/* O WhatsApp é o canal real de agendamento e ocupa mais espaço: três cartões
+   iguais lado a lado escondiam essa hierarquia. */
+.ways{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-rows:auto auto;gap:clamp(16px,2vw,24px)}
+.card--lead{grid-row:span 2;justify-content:center;gap:14px}
+.card--lead .card__title{font-size:clamp(1.7rem,3vw,2.3rem)}
+@media (max-width:820px){ .ways{grid-template-columns:1fr} .card--lead{grid-row:auto} }
 
 .ticks{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
 .ticks li{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2)}
 .ticks .i{color:var(--rose-ink);margin-top:3px}
-.ticks--lg{font-size:1.05rem;gap:12px;margin-bottom:2.2em}
-.ticks--lg li{padding:10px 0;border-bottom:1px solid var(--rule)}
+.ticks--lg{font-size:1.06rem;gap:12px;margin-bottom:2.2em}
+.ticks--lg li{padding:6px 0}
+
+/* Navegação lateral entre áreas: são três links, não três cartões. */
+.arealinks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+.arealinks a{
+  display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:999px;
+  border:1.5px solid var(--control-line);color:var(--ink);text-decoration:none;font-weight:600;font-size:.94rem;
+  transition:border-color .18s,color .18s
+}
+.arealinks a:hover{border-color:var(--rose);color:var(--rose-ink)}
+@media (prefers-reduced-motion:reduce){ .arealinks a{transition:none} }
 
 /* equipe */
 .person__head{display:flex;gap:16px;align-items:center}
@@ -338,7 +392,7 @@ body.drawer-open{overflow:hidden}
 .person__data{display:grid;grid-template-columns:repeat(3, auto);gap:8px 20px;margin:6px 0 4px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .person__data div{display:flex;flex-direction:column;gap:3px}
 .person__data dt{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-.person__data dd{margin:0;font-weight:500;font-size:.95rem}
+.person__data dd{margin:0;font-weight:500;font-size:.94rem;font-variant-numeric:tabular-nums}
 @media (max-width:520px){.person__data{grid-template-columns:1fr 1fr}}
 
 /* ---------- 10. passos --------------------------------------------------- */
@@ -352,7 +406,7 @@ body.drawer-open{overflow:hidden}
 /* ---------- 11. unidades ------------------------------------------------- */
 .unit{border-radius:var(--radius);padding:clamp(24px, 3vw, 36px);display:flex;flex-direction:column;gap:12px}
 .unit--dark{background:var(--plum);color:var(--on-plum)}
-.unit--dark .eyebrow{color:var(--on-plum-2)}
+.unit--dark .eyebrow,.unit--dark .tag{color:var(--on-plum-2)}
 .unit--dark .unit__title{color:var(--on-plum)}
 .unit--dark a{color:var(--on-plum)}
 .unit--dark .muted{color:var(--on-plum-2)}
@@ -361,11 +415,11 @@ body.drawer-open{overflow:hidden}
 .unit__title{font-size:clamp(1.8rem, 3vw, 2.4rem);margin:0}
 .unit__addr,.unit__hours{display:flex;gap:10px;align-items:flex-start;margin:0}
 .unit__addr .i,.unit__hours .i{margin-top:4px;opacity:.8}
-.hours{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.hours{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums}
 .hours li{display:flex;gap:14px;flex-wrap:wrap}
 .hours span{opacity:.85}
 .unit__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:auto;padding-top:10px}
-.unit__link{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;font-size:.92rem}
+.unit__link{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;font-size:.94rem}
 .unit__link:hover{text-decoration:underline}
 
 .mapcard{
@@ -405,7 +459,7 @@ body.drawer-open{overflow:hidden}
 .band{background:var(--plum);color:var(--on-plum);padding:clamp(56px, 8vw, 96px) 0}
 .band__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px, 5vw, 64px);align-items:center}
 .band__title{color:var(--on-plum);font-size:clamp(2rem, 4vw, 3rem);margin:0 0 .4em}
-.band__text{color:var(--on-plum-2);font-size:1.08rem;max-width:48ch;margin:0}
+.band__text{color:var(--on-plum-2);font-size:1.06rem;max-width:48ch;margin:0}
 .band__actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .band__link{width:100%;display:inline-flex;align-items:center;gap:8px;color:var(--on-plum-2);text-decoration:none;font-weight:600;font-size:.94rem;margin-top:8px}
 .band__link:hover{color:var(--on-plum)}
@@ -413,19 +467,19 @@ body.drawer-open{overflow:hidden}
 
 /* ---------- 14. cabeçalho de página e trilhas --------------------------- */
 .page-head{padding:clamp(28px, 4vw, 48px) 0 clamp(20px, 3vw, 32px)}
-.page-head__title{font-size:clamp(2.1rem, 4.6vw, 3.6rem);font-weight:450;letter-spacing:-.02em;max-width:18ch;margin:0 0 .4em}
+.page-head__title{font-size:clamp(1.9rem, 3.9vw, 3rem);font-weight:450;letter-spacing:-.02em;max-width:18ch;margin:0 0 .4em}
 .page-head--area .page-head__grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
 .page-head__art{display:flex;justify-content:center}
 .page-head--post .page-head__title{max-width:24ch}
-.post__meta{font-size:.9rem;color:var(--ink-3);margin:0}
+.post__meta{font-size:.88rem;color:var(--ink-3);margin:0}
 @media (max-width:860px){
   .page-head--area .page-head__grid{grid-template-columns:1fr}
   .page-head__art{display:none}
 }
-.crumbs{font-size:.84rem;margin-bottom:22px}
+.crumbs{font-size:.8rem;margin-bottom:22px}
 .crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;color:var(--ink-3)}
 .crumbs li+li::before{content:"/";margin-right:6px;color:var(--rule-2)}
-.crumbs a{color:var(--ink-3);text-decoration:none}
+.crumbs a{color:var(--ink-3);text-decoration:none;display:inline-block;padding:7px 2px;margin:-7px 0}
 .crumbs a:hover{color:var(--rose-ink);text-decoration:underline}
 .crumbs [aria-current]{color:var(--ink-2)}
 
@@ -439,7 +493,7 @@ body.drawer-open{overflow:hidden}
 }
 .note{background:var(--white);border:1px solid var(--rule);border-radius:var(--radius);padding:24px}
 .note--soft{background:var(--blush);border-color:transparent}
-.note .eyebrow{margin-bottom:.6em}
+.note .eyebrow,.note .tag{margin-bottom:.6em}
 .note p{margin:0 0 .6em;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
 .note p:last-child{margin-bottom:0}
 .note .i{margin-top:3px;color:var(--rose-ink)}
@@ -450,9 +504,9 @@ body.drawer-open{overflow:hidden}
 
 .datalist{margin:0 0 1.6em;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--rule)}
 .datalist div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule)}
-.datalist dt{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink-3);font-size:.9rem}
+.datalist dt{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink-3);font-size:.88rem}
 .datalist dt .i{color:var(--rose-ink)}
-.datalist dd{margin:0;color:var(--ink-2)}
+.datalist dd{margin:0;color:var(--ink-2);font-variant-numeric:tabular-nums}
 @media (max-width:520px){.datalist div{grid-template-columns:1fr;gap:4px}}
 
 .official{
@@ -479,14 +533,17 @@ body.drawer-open{overflow:hidden}
 .chip:has(input:checked) span{background:var(--plum);border-color:var(--plum);color:var(--on-plum)}
 .chip:has(input:focus-visible) span{outline:2px solid var(--focus);outline-offset:3px}
 .composer__out{background:var(--white);border:1px solid var(--rule);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px}
-.composer__out .eyebrow{margin:0}
+.composer__out .eyebrow,.composer__out .tag{margin:0}
 .composer__preview{display:block;white-space:pre-line;background:var(--rose-soft);border-radius:16px;border-bottom-right-radius:4px;padding:14px 18px;line-height:1.5;color:var(--ink)}
 .composer__out .btn{align-self:flex-start}
 .composer__out .fineprint{margin:0}
+/* Só aparece quando o script não rodou: aí os botões não montam a mensagem. */
+.has-js .semjs{display:none}
 
 /* ---------- 17. artigo --------------------------------------------------- */
 .post .shell--narrow{margin-bottom:clamp(40px, 6vw, 72px)}
-.prose{font-size:1.06rem;line-height:1.75;color:var(--ink-2)}
+.prose{font-size:1.06rem;line-height:1.75;color:var(--ink-2);max-width:var(--measure)}
+.prose,.note p,.faq__body{hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:8 4 4}
 .prose h2{font-size:clamp(1.45rem, 2.4vw, 1.9rem);color:var(--ink);margin:1.6em 0 .5em}
 .prose p{margin:0 0 1.1em}
 .prose ul,.prose ol{margin:0 0 1.2em;padding-left:1.3em}
@@ -499,18 +556,19 @@ body.drawer-open{overflow:hidden}
 
 /* ---------- 18. rodapé --------------------------------------------------- */
 .site-foot{background:var(--cream-2);border-top:1px solid var(--rule);padding:clamp(48px, 6vw, 80px) 0 32px;color:var(--ink-2);font-size:.94rem}
-.foot__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(24px, 4vw, 48px)}
+.foot__grid{display:grid;grid-template-columns:1.4fr repeat(4, 1fr);gap:clamp(24px, 4vw, 44px)}
 .foot__brand p{max-width:34ch}
 .brand--foot{margin-bottom:14px}
 .foot__social a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600}
-.foot__title{font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 .9em;font-weight:600}
+.foot__title{font-family:var(--sans);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 .9em;font-weight:600}
 .foot__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .foot__list a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink-2)}
 .foot__list a:hover{color:var(--rose-ink)}
 .foot__list .i{color:var(--rose-ink)}
-.foot__legal{margin-top:clamp(32px, 4vw, 48px);padding-top:24px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-3)}
+.foot__legal{margin-top:clamp(32px, 4vw, 48px);padding-top:24px;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-3)}
 .foot__legal p{margin:0 0 .5em}
-@media (max-width:980px){.foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:1100px){.foot__grid{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:820px){.foot__grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.foot__grid{grid-template-columns:1fr}}
 
 /* ---------- 19. barra fixa no celular ----------------------------------- */
